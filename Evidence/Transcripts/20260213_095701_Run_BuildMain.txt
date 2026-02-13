@@ -1,0 +1,61 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20260213095701
+Username: WIN-7A4ND87215S\Administrator
+RunAs User: WIN-7A4ND87215S\Administrator
+Configuration Name: 
+Machine: WIN-7A4ND87215S (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe
+Process ID: 4164
+PSVersion: 5.1.26100.1591
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.1591
+BuildVersion: 10.0.26100.1591
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+[+] Transcript started: Evidence\\Transcripts\\20260213_095701_Run_BuildMain.txt
+[+] Admin privileges confirmed.
+
+[Phase 1] Prerequisites...
+[*] Invoke-BarmBuzz-OneShots: LCM then Network
+[*] LCM already configured (flag present).
+--- BarmBuzz Network, PSRemoting & RSAT Prep ---
+[*] Checking Network Connection Profiles (all connected NICs)...
+    'Network' already Private.
+
+[*] Configuring Windows Remote Management (WinRM)...
+
+[*] Verifying Connectivity...
+    [+] WinRM is responding! (Protocol Version: OS: 0.0.0 SP: 0.0 Stack: 3.0)
+    [+] Ready for Orchestration.
+
+[*] Ensuring RSAT tools (AD + GPO) are installed...
+WARNING: RSAT install (server) may have failed. StdErr: Try {
+    Import-Module ServerManager -ErrorAction Stop
+    Install-WindowsFeature RSAT-AD-PowerShell -ErrorAction Stop | Out-Null
+    Install-WindowsFeature GPMC -ErrorAction Stop | Out-Null
+    Write-Output ''RSAT features installed (server).''
+} Catch { Write-Error $_ } : The specified module 'ServerManager' was not loaded because no valid module file was 
+found in any module directory.
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException
+[+] Network/Remoting/RSAT baseline complete.
+[*] LCM already configured (skipping).
+[*] Network already configured (skipping).
+[+] Phase 1 complete.
+
+[Phase 2] Compile + Apply DSC...
+[+] Found configuration: StudentBaseline
+[*] Compiling -> DSC\\Outputs\\StudentBaseline
+PS>TerminatingError(Import-Module): "The running command stopped because the preference variable "ErrorActionPreference" or common parameter is set to Stop: The version of Windows PowerShell on this computer is '5.1.26100.1591'. The module 'C:\Program Files\WindowsPowerShell\Modules\PSDesiredStateConfiguration\2.0.7\PSDesiredStateConfiguration.psd1' requires a minimum Windows PowerShell version of '6.1' to run. Verify that you have the minimum required version of Windows PowerShell installed, and then try again."
+>> TerminatingError(Import-Module): "The running command stopped because the preference variable "ErrorActionPreference" or common parameter is set to Stop: The version of Windows PowerShell on this computer is '5.1.26100.1591'. The module 'C:\Program Files\WindowsPowerShell\Modules\PSDesiredStateConfiguration\2.0.7\PSDesiredStateConfiguration.psd1' requires a minimum Windows PowerShell version of '6.1' to run. Verify that you have the minimum required version of Windows PowerShell installed, and then try again."
+
+[-] BUILD FAILED
+Message: The version of Windows PowerShell on this computer is '5.1.26100.1591'. The module 'C:\Program Files\WindowsPowerShell\Modules\PSDesiredStateConfiguration\2.0.7\PSDesiredStateConfiguration.psd1' requires a minimum Windows PowerShell version of '6.1' to run. Verify that you have the minimum required version of Windows PowerShell installed, and then try again.
+**********************
+Windows PowerShell transcript end
+End time: 20260213095713
+**********************
