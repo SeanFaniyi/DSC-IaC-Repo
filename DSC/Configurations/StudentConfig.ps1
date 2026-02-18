@@ -33,16 +33,13 @@ Configuration StudentBaseline {
        
         # --- [ Network ] --- 
     # {
-        #DHCP disaled to prevent conflicts with static IP configuration
         # Install-Module NetworkingDsc -Repository PSGallery -Force
         # Will need to install module on local machine.
-        DhcpClient DisabledDhcpClient{
-            State          = 'Disabled'
-            InterfaceAlias = 'Ethernet'
-            AddressFamily  = 'IPv4'
-        }
+
 
         # Static IPS
+         #DHCP disaled to prevent conflicts with static IP configuration
+
         IPAddress SetIP {
             InterfaceAlias = $Node.Network.InterfaceAlias
             IPAddress      = $Node.Network.IPAddress
