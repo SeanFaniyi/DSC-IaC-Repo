@@ -72,17 +72,17 @@ Configuration StudentBaseline {
         }
     # }
         # --- Firewalls ---
-        NetFirewallProfile SetPrivateFirewall {
+        FirewallProfile SetPrivateFirewall {
             Name    = 'Private'
             Enabled = 'True'
         }
 
-        NetFirewallProfile SetPublicFirewall {
+        FirewallProfile SetPublicFirewall {
             Name    = 'Public'
             Enabled = 'True'
         }
 
-        NetFirewallProfile SetDomainFirewall {
+        FirewallProfile SetDomainFirewall {
             Name    = 'Domain'
             Enabled = 'True'
         }
