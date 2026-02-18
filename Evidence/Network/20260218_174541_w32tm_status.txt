@@ -1,0 +1,10 @@
+Leap Indicator: 0(no warning)
+Stratum: 4 (secondary reference - syncd by (S)NTP)
+Precision: -23 (119.209ns per tick)
+Root Delay: 0.0260220s
+Root Dispersion: 0.0386778s
+ReferenceId: 0x3389896F (source IP:  51.137.137.111)
+Last Successful Sync Time: 2/18/2026 5:39:57 PM
+Source: time.windows.com,0x8 
+Poll Interval: 10 (1024s)
+
