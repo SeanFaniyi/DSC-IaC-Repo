@@ -1,37 +1,37 @@
 /*
 @TargetNode='localhost'
 @GeneratedBy=Administrator
-@GenerationDate=02/18/2026 17:50:07
-@GenerationHost=DC-01
+@GenerationDate=02/18/2026 18:08:16
+@GenerationHost=BB-DC01
 */
 
 instance of DSC_Computer as $DSC_Computer1ref
 {
-Name = "BB-DC01";
- ResourceID = "[Computer]ComputerName";
- ModuleVersion = "10.0.0";
+ModuleVersion = "10.0.0";
  ModuleName = "ComputerManagementDsc";
- SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::13::9::Computer";
+ SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::13::9::Computer";
+ ResourceID = "[Computer]ComputerName";
+ Name = "BB-DC01";
  ConfigurationName = "StudentBaseline";
 };
 instance of DSC_TimeZone as $DSC_TimeZone1ref
 {
-ResourceID = "[TimeZone]TimeZone";
+ModuleName = "ComputerManagementDsc";
+ ResourceID = "[TimeZone]TimeZone";
  SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::20::9::TimeZone";
- ModuleName = "ComputerManagementDsc";
+ ModuleVersion = "10.0.0";
  TimeZone = "GMT Standard Time";
- IsSingleInstance = "Yes";
- ModuleVersion = "10.0.0";
+ IsSingleInstance = "Yes";
  ConfigurationName = "StudentBaseline";
 };
 instance of MSFT_ServiceResource as $MSFT_ServiceResource1ref
 {
-ResourceID = "[Service]WindowsTimeService";
- StartupType = "Automatic";
- SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::26::13::Service";
- ModuleName = "PsDesiredStateConfiguration";
- State = "Running";
+ModuleName = "PsDesiredStateConfiguration";
+ ResourceID = "[Service]WindowsTimeService";
  Name = "W32Time";
+ SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::26::13::Service";
+ StartupType = "Automatic";
+ State = "Running";
 
 ModuleVersion = "1.0";
 DependsOn = {
@@ -40,133 +40,133 @@ DependsOn = {
 };
 instance of DSC_IPAddress as $DSC_IPAddress1ref
 {
-IPAddress = {
-    "192.168.10.10/24"
-};
+InterfaceAlias = "Ethernet";
+ ModuleName = "NetworkingDsc";
  ResourceID = "[IPAddress]SetIP";
  SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::43::9::IPAddress";
- ModuleName = "NetworkingDsc";
- AddressFamily = "IPv4";
  ModuleVersion = "9.1.0";
- InterfaceAlias = "Ethernet";
+ IPAddress = {
+    "192.168.122.10/24"
+};
+ AddressFamily = "IPv4";
  ConfigurationName = "StudentBaseline";
 };
 instance of DSC_DefaultGatewayAddress as $DSC_DefaultGatewayAddress1ref
 {
-ResourceID = "[DefaultGatewayAddress]SetGateway";
- SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::52::9::DefaultGatewayAddress";
+InterfaceAlias = "Ethernet";
+ Address = "192.168.122.1";
  ModuleName = "NetworkingDsc";
- AddressFamily = "IPv4";
- Address = "192.168.10.10";
+ ResourceID = "[DefaultGatewayAddress]SetGateway";
+ SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::52::9::DefaultGatewayAddress";
  ModuleVersion = "9.1.0";
- InterfaceAlias = "Ethernet";
+ AddressFamily = "IPv4";
  ConfigurationName = "StudentBaseline";
 };
 instance of DSC_NetConnectionProfile as $DSC_NetConnectionProfile1ref
 {
-ResourceID = "[NetConnectionProfile]NetworkProfile";
- SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::59::9::NetConnectionProfile";
+InterfaceAlias = "Ethernet";
  ModuleName = "NetworkingDsc";
- NetworkCategory = "Private";
+ ResourceID = "[NetConnectionProfile]NetworkProfile";
+ SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::59::9::NetConnectionProfile";
  ModuleVersion = "9.1.0";
- InterfaceAlias = "Ethernet";
+ NetworkCategory = "Private";
  ConfigurationName = "StudentBaseline";
 };
 instance of DSC_DnsServerAddress as $DSC_DnsServerAddress1ref
 {
-ResourceID = "[DnsServerAddress]SetDNS";
- SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::64::9::DnsServerAddress";
- ModuleName = "NetworkingDsc";
- AddressFamily = "IPv4";
+InterfaceAlias = "Ethernet";
  Address = {
     "127.0.0.1"
 };
+ ModuleName = "NetworkingDsc";
+ ResourceID = "[DnsServerAddress]SetDNS";
+ SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::64::9::DnsServerAddress";
  ModuleVersion = "9.1.0";
- InterfaceAlias = "Ethernet";
+ AddressFamily = "IPv4";
  ConfigurationName = "StudentBaseline";
 };
 instance of DSC_FirewallProfile as $DSC_FirewallProfile1ref
 {
-ResourceID = "[FirewallProfile]SetPrivateFirewall";
+ModuleName = "NetworkingDsc";
+ ResourceID = "[FirewallProfile]SetPrivateFirewall";
+ Name = "Private";
  SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::71::9::FirewallProfile";
- ModuleName = "NetworkingDsc";
- Enabled = "True";
  ModuleVersion = "9.1.0";
- Name = "Private";
+ Enabled = "True";
  ConfigurationName = "StudentBaseline";
 };
 instance of DSC_FirewallProfile as $DSC_FirewallProfile2ref
 {
-ResourceID = "[FirewallProfile]SetPublicFirewall";
+ModuleName = "NetworkingDsc";
+ ResourceID = "[FirewallProfile]SetPublicFirewall";
+ Name = "Public";
  SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::76::9::FirewallProfile";
- ModuleName = "NetworkingDsc";
- Enabled = "True";
  ModuleVersion = "9.1.0";
- Name = "Public";
+ Enabled = "True";
  ConfigurationName = "StudentBaseline";
 };
 instance of DSC_FirewallProfile as $DSC_FirewallProfile3ref
 {
-ResourceID = "[FirewallProfile]SetDomainFirewall";
+ModuleName = "NetworkingDsc";
+ ResourceID = "[FirewallProfile]SetDomainFirewall";
+ Name = "Domain";
  SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::81::9::FirewallProfile";
- ModuleName = "NetworkingDsc";
- Enabled = "True";
  ModuleVersion = "9.1.0";
- Name = "Domain";
+ Enabled = "True";
  ConfigurationName = "StudentBaseline";
 };
 instance of MSFT_RoleResource as $MSFT_RoleResource1ref
 {
-Ensure = "Present";
+ModuleName = "PsDesiredStateConfiguration";
+ Ensure = "Present";
  ResourceID = "[WindowsFeature]ADDSRole";
- SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::90::13::WindowsFeature";
- ModuleName = "PsDesiredStateConfiguration";
  Name = "AD-Domain-Services";
+ SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::90::13::WindowsFeature";
 
 ModuleVersion = "1.0";
  ConfigurationName = "StudentBaseline";
 };
 instance of MSFT_RoleResource as $MSFT_RoleResource2ref
 {
-Ensure = "Present";
+ModuleName = "PsDesiredStateConfiguration";
+ Ensure = "Present";
  ResourceID = "[WindowsFeature]Feature_DNS";
- SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::97::13::WindowsFeature";
- ModuleName = "PsDesiredStateConfiguration";
  Name = "DNS";
+ SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::97::13::WindowsFeature";
 
 ModuleVersion = "1.0";
  ConfigurationName = "StudentBaseline";
 };
 instance of MSFT_RoleResource as $MSFT_RoleResource3ref
 {
-Ensure = "Present";
+ModuleName = "PsDesiredStateConfiguration";
+ Ensure = "Present";
  ResourceID = "[WindowsFeature]Feature_RSAT-AD-Tools";
- SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::97::13::WindowsFeature";
- ModuleName = "PsDesiredStateConfiguration";
  Name = "RSAT-AD-Tools";
+ SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::97::13::WindowsFeature";
 
 ModuleVersion = "1.0";
  ConfigurationName = "StudentBaseline";
 };
 instance of MSFT_ServiceResource as $MSFT_ServiceResource2ref
 {
-ResourceID = "[Service]WinRMService";
- StartupType = "Automatic";
- SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::103::13::Service";
- ModuleName = "PsDesiredStateConfiguration";
- State = "Running";
+ModuleName = "PsDesiredStateConfiguration";
+ ResourceID = "[Service]WinRMService";
  Name = "WinRM";
+ SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::103::13::Service";
+ StartupType = "Automatic";
+ State = "Running";
 
 ModuleVersion = "1.0";
  ConfigurationName = "StudentBaseline";
 };
 instance of DSC_PendingReboot as $DSC_PendingReboot1ref
 {
-Name = "PostBaselineRebootChecks";
- ResourceID = "[PendingReboot]RebootCheck";
- ModuleVersion = "10.0.0";
+ModuleVersion = "10.0.0";
  ModuleName = "ComputerManagementDsc";
- SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::111::9::PendingReboot";
+ SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::111::9::PendingReboot";
+ ResourceID = "[PendingReboot]RebootCheck";
+ Name = "PostBaselineRebootChecks";
  ConfigurationName = "StudentBaseline";
 };
 instance of OMI_ConfigurationDocument
@@ -180,9 +180,9 @@ instance of OMI_ConfigurationDocument
 
                         Author="Administrator";
 
-                        GenerationDate="02/18/2026 17:50:07";
+                        GenerationDate="02/18/2026 18:08:16";
 
-                        GenerationHost="DC-01";
+                        GenerationHost="BB-DC01";
 
                         Name="StudentBaseline";
 

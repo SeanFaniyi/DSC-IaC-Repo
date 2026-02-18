@@ -15,8 +15,8 @@
             # --- Network ---
             Network = @{
                 InterfaceAlias = 'Ethernet'
-                IPAddress      = '192.168.10.10/24'  
-                DefaultGateway = '192.168.10.10'
+                IPAddress      = '192.168.122.10/24'  
+                DefaultGateway = '192.168.122.1'
                 DNSServers      = @('127.0.0.1')
                 NetworkCategory = 'Private'       
             }
