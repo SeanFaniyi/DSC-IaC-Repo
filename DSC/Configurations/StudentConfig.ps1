@@ -46,7 +46,6 @@ Configuration StudentBaseline {
         IPAddress SetIP {
             InterfaceAlias = $Node.Network.InterfaceAlias
             IPAddress      = $Node.Network.IPAddress
-            PrefixLength   = $Node.Network.PrefixLength
             AddressFamily  = 'IPv4'
     
 

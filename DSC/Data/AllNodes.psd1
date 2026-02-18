@@ -15,8 +15,7 @@
             # --- Network ---
             Network = @{
                 InterfaceAlias = 'Ethernet'
-                IPAddress      = '192.168.10.10'  
-                PrefixLength   = 24
+                IPAddress      = '192.168.10.10/24'  
                 DefaultGateway = '192.168.10.10'
                 DNSServers      = @('127.0.0.1')
                 NetworkCategory = 'Private'       
@@ -24,7 +23,7 @@
 
             
             # --- Services ---
-            InstallADDSRole = $rue
+            InstallADDSRole = $true
             WinRMService = $true
             WindowsFeatures = @(
                 'DNS',
