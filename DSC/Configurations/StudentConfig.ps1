@@ -34,6 +34,8 @@ Configuration StudentBaseline {
         # --- [ Network ] --- 
     # {
         #DHCP disaled to prevent conflicts with static IP configuration
+        # Install-Module NetworkingDsc -Repository PSGallery -Force
+        # Will need to install module on local machine.
         DhcpClient DisabledDhcpClient{
             State          = 'Disabled'
             InterfaceAlias = 'Ethernet'
@@ -42,12 +44,11 @@ Configuration StudentBaseline {
 
         # Static IPS
         IPAddress SetIP {
-            IPAddress SetIP {
             InterfaceAlias = $Node.Network.InterfaceAlias
             IPAddress      = $Node.Network.IPAddress
             PrefixLength   = $Node.Network.PrefixLength
             AddressFamily  = 'IPv4'
-            }
+    
 
         }
 
@@ -67,7 +68,7 @@ Configuration StudentBaseline {
         DnsServerAddress SetDNS {
             InterfaceAlias = $Node.Network.InterfaceAlias
             AddressFamily  = 'IPv4'
-            ServerAddresses = $Node.Network.DNSServer
+            Address = $Node.Network.DNSServers
         }
     # }
         # --- Firewalls ---

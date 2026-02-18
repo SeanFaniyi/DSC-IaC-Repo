@@ -18,13 +18,13 @@
                 IPAddress      = '192.168.10.10'  
                 PrefixLength   = 24
                 DefaultGateway = '192.168.10.10'
-                DNSServer      = '127.0.0.1'
+                DNSServers      = @('127.0.0.1')
                 NetworkCategory = 'Private'       
             }
 
             
             # --- Services ---
-            InstallADDSRole = $true
+            InstallADDSRole = $rue
             WinRMService = $true
             WindowsFeatures = @(
                 'DNS',
