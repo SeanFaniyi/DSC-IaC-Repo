@@ -29,7 +29,12 @@
 
             
             # --- Services ---
-            EnsureWinRM = $true
+            InstallADDSRole = $true
+            WinRMService = $true
+            WindowsFeatures = @(
+                'DNS',
+                'RSAT-AD-Tools'
+            )
         }
     )
 }
