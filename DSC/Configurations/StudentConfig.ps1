@@ -29,7 +29,7 @@ Configuration StudentBaseline {
             StartupType = 'Automatic'
             DependsOn = '[TimeZone]TimeZone'
         }
-C       
+       
         WindowsFeature ADDSRole {
             Name = 'AD-Domain-Services'
             Ensure = 'Present'

@@ -1,0 +1,82 @@
+/*
+@TargetNode='localhost'
+@GeneratedBy=Administrator
+@GenerationDate=02/18/2026 00:45:51
+@GenerationHost=WIN-7A4ND87215S
+*/
+
+instance of DSC_Computer as $DSC_Computer1ref
+{
+ResourceID = "[Computer]ComputerName";
+ ModuleName = "ComputerManagementDsc";
+ Name = "DC-01";
+ ModuleVersion = "10.0.0";
+ SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::17::9::Computer";
+ ConfigurationName = "StudentBaseline";
+};
+instance of DSC_TimeZone as $DSC_TimeZone1ref
+{
+TimeZone = "GMT Standard Time";
+ ModuleName = "ComputerManagementDsc";
+ ResourceID = "[TimeZone]TimeZone";
+ IsSingleInstance = "Yes";
+ SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::21::9::TimeZone";
+ ModuleVersion = "10.0.0";
+ ConfigurationName = "StudentBaseline";
+};
+instance of MSFT_ServiceResource as $MSFT_ServiceResource1ref
+{
+StartupType = "Automatic";
+ ModuleName = "PsDesiredStateConfiguration";
+ Name = "W32Time";
+ ResourceID = "[Service]WindowsTimeService";
+ State = "Running";
+ SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::26::9::Service";
+
+ModuleVersion = "1.0";
+DependsOn = {
+    "[TimeZone]TimeZone"};
+ ConfigurationName = "StudentBaseline";
+};
+instance of MSFT_RoleResource as $MSFT_RoleResource1ref
+{
+ModuleName = "PsDesiredStateConfiguration";
+ Name = "AD-Domain-Services";
+ ResourceID = "[WindowsFeature]ADDSRole";
+ SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::33::9::WindowsFeature";
+ Ensure = "Present";
+
+ModuleVersion = "1.0";
+ ConfigurationName = "StudentBaseline";
+};
+instance of MSFT_RoleResource as $MSFT_RoleResource2ref
+{
+ModuleName = "PsDesiredStateConfiguration";
+ Name = "RSAT-AD-Tools";
+ ResourceID = "[WindowsFeature]RSATADDSRole";
+ SourceInfo = "C:\\Users\\Administrator\\DSC-IaC-Repo\\DSC\\Configurations\\StudentConfig.ps1::38::9::WindowsFeature";
+ Ensure = "Present";
+
+ModuleVersion = "1.0";
+DependsOn = {
+    "[WindowsFeature]ADDSRole"};
+ ConfigurationName = "StudentBaseline";
+};
+instance of OMI_ConfigurationDocument
+
+                    {
+ Version="2.0.0";
+
+                        MinimumCompatibleVersion = "1.0.0";
+
+                        CompatibleVersionAdditionalProperties= {"Omi_BaseResource:ConfigurationName"};
+
+                        Author="Administrator";
+
+                        GenerationDate="02/18/2026 00:45:51";
+
+                        GenerationHost="WIN-7A4ND87215S";
+
+                        Name="StudentBaseline";
+
+                    };
