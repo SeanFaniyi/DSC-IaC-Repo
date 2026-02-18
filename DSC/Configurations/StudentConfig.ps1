@@ -1,10 +1,3 @@
-<#
-STUDENT TASK:
-- Define Configuration StudentBaseline
-- Use ConfigurationData (AllNodes.psd1)
-- DO NOT hardcode passwords here.
-#>
-
 Configuration StudentBaseline {
     param()
 
@@ -36,6 +29,7 @@ Configuration StudentBaseline {
                 StartupType = 'Automatic'
                 DependsOn = '[TimeZone]TimeZone'
             }
+        }
        
         # --- [ Network ] --- 
     # {
@@ -53,7 +47,8 @@ Configuration StudentBaseline {
             IPAddress      = $Node.Network.IPAddress
             PrefixLength   = $Node.Network.PrefixLength
             AddressFamily  = 'IPv4'
-}
+            }
+
         }
 
         # Default Gateway

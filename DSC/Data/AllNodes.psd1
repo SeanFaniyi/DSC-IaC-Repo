@@ -12,11 +12,6 @@
             TimeZone = 'GMT Standard Time'
             EnsureW32TimeService = $true
 
-            # --- Features ---
-            InstallADDSRole     = $true
-            InstallRSATADDSRole = $true
-            InstallDNSRole      = $true 
-
             # --- Network ---
             Network = @{
                 InterfaceAlias = 'Ethernet'
