@@ -50,6 +50,7 @@ Configuration StudentBaseline {
         NetConnectionProfile Internal_NetworkProfile {
             InterfaceAlias  = $Node.InternalNetwork.InterfaceAlias
             NetworkCategory = $Node.InternalNetwork.NetworkCategory
+            DependsOn       = '[IPAddress]Internal_SetIP'
         }
 
         DnsServerAddress Internal_SetDNS {
