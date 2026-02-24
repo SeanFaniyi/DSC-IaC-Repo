@@ -4,24 +4,23 @@ Configuration StudentBaseline {
     Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName ComputerManagementDSC
     Import-DscResource -Module NetworkingDsc
-    #Import-DscResource -ModuleName ActivedirectoryDSC
+    Import-DscResource -ModuleName ActivedirectoryDSC
+
 
     Node $AllNodes.NodeName {
-        
+
         # --- Identity ---
 
         Computer ComputerName {
-            Name = $Node.ComputerName           
+            Name = $Node.ComputerName 
         }
-
-
         # --- Time ---
 
         TimeZone TimeZone {
             IsSingleInstance = 'Yes'
             TimeZone = $Node.TimeZone
         }
-
+        
         if ($Node.EnsureW32TimeService) {
             Service WindowsTimeService {
                 Name = 'W32Time'
@@ -30,44 +29,47 @@ Configuration StudentBaseline {
                 DependsOn = '[TimeZone]TimeZone'
             }
         }
-       
-        # --- [ Network ] --- 
-    # {
-        # Install-Module NetworkingDsc -Repository PSGallery -Force
-        # Will need to install module on local machine.
 
+        # =========================
+        # NETWORK — INTERNAL NIC
+        # =========================
 
-        # Static IPS
-         #DHCP disaled to prevent conflicts with static IP configuration
-
-        IPAddress SetIP {
-            InterfaceAlias = $Node.Network.InterfaceAlias
-            IPAddress      = $Node.Network.IPAddress
-            AddressFamily  = 'IPv4'
-    
-
-        }
-
-        # Default Gateway
-        DefaultGatewayAddress SetGateway {
-            InterfaceAlias = $Node.Network.InterfaceAlias
-            Address        = $Node.Network.DefaultGateway
+        IPAddress Internal_SetIP {
+            InterfaceAlias = $Node.InternalNetwork.InterfaceAlias
+            IPAddress      = $Node.InternalNetwork.IPAddress
             AddressFamily  = 'IPv4'
         }
 
-        # Set Network Category to Private for pre-promotion configuration
-        NetConnectionProfile NetworkProfile {
-             InterfaceAlias = $Node.Network.InterfaceAlias
-             NetworkCategory = $Node.Network.NetworkCategory
+        DefaultGatewayAddress Internal_SetGateway {
+            InterfaceAlias = $Node.InternalNetwork.InterfaceAlias
+            Address        = $Node.InternalNetwork.DefaultGateway
+            AddressFamily  = 'IPv4'
+            DependsOn      = '[IPAddress]Internal_SetIP'
         }
 
-        DnsServerAddress SetDNS {
-            InterfaceAlias = $Node.Network.InterfaceAlias
-            AddressFamily  = 'IPv4'
-            Address = $Node.Network.DNSServers
+        NetConnectionProfile Internal_NetworkProfile {
+            InterfaceAlias  = $Node.InternalNetwork.InterfaceAlias
+            NetworkCategory = $Node.InternalNetwork.NetworkCategory
         }
-    # }
+
+        DnsServerAddress Internal_SetDNS {
+            InterfaceAlias = $Node.InternalNetwork.InterfaceAlias
+            AddressFamily  = 'IPv4'
+            Address        = $Node.InternalNetwork.DNSServers
+            DependsOn      = '[IPAddress]Internal_SetIP'
+        }
+
+        # =========================
+        # NETWORK — EXTERNAL NIC
+        # =========================
+
+        NetConnectionProfile External_NetworkProfile {
+            InterfaceAlias  = $Node.ExternalNetwork.InterfaceAlias
+            NetworkCategory = $Node.ExternalNetwork.NetworkCategory
+        }
+
         # --- Firewalls ---
+
         FirewallProfile SetPrivateFirewall {
             Name    = 'Private'
             Enabled = 'True'
@@ -82,10 +84,9 @@ Configuration StudentBaseline {
             Name    = 'Domain'
             Enabled = 'True'
         }
-        
 
         # --- Services ---
-        # ADDS Role seperately defined to ensure it is installed before dependent features
+
         if ($Node.InstallADDSRole) {
             WindowsFeature ADDSRole {
                 Name   = 'AD-Domain-Services'
@@ -99,6 +100,7 @@ Configuration StudentBaseline {
                 Ensure = 'Present'
             }
         }
+
         if ($Node.WinRMService) {
             Service WinRMService {
                 Name        = 'WinRM'

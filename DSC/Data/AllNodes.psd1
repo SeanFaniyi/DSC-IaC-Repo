@@ -8,19 +8,29 @@
             ComputerName = 'BB-DC01'
             DomainName   = 'barmbuzz.corp'
 
+            # --- AD Settings ---
+            DomainNetbiosName = 'BARMBUZZ'
+            ForestMode = 'WinThreshold'
+            DomainMode = 'WinThreshold'
+            
+
             # --- Time ---
             TimeZone = 'GMT Standard Time'
             EnsureW32TimeService = $true
 
             # --- Network ---
-            Network = @{
-                InterfaceAlias = 'Ethernet'
-                IPAddress      = '192.168.122.10/24'  
-                DefaultGateway = '192.168.122.1'
-                DNSServers      = @('127.0.0.1')
-                NetworkCategory = 'Private'       
+            InternalNetwork = @{
+                InterfaceAlias = 'Ethernet 2'
+                IPAddress      = '192.168.10.10/24'
+                DefaultGateway = '192.168.10.1'
+                DNSServers     = @('127.0.0.1')
+                NetworkCategory = 'Private'
             }
 
+            ExternalNetwork = @{
+                InterfaceAlias = 'Ethernet' 
+                NetworkCategory = 'Private'
+            }
             
             # --- Services ---
             InstallADDSRole = $true
