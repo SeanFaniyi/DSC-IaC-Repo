@@ -43,7 +43,7 @@
             )
 
             # --- Security ---
-            AllowPlainTextPassword = $true
+            PSDscAllowPlainTextPassword = $true           
             AllowDomainUser = $true
 
         }

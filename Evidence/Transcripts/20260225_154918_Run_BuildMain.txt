@@ -1,0 +1,52 @@
+**********************
+PowerShell transcript start
+Start time: 20260225154918
+Username: BB-DC01\Administrator
+RunAs User: BB-DC01\Administrator
+Configuration Name: 
+Machine: BB-DC01 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -WorkingDirectory ~
+Process ID: 4324
+PSVersion: 7.5.4
+PSEdition: Core
+GitCommitId: 7.5.4
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[+] Transcript started: Evidence\\Transcripts\\20260225_154918_Run_BuildMain.txt
+[+] Admin privileges confirmed.
+
+[Phase 1] Prerequisites...
+[*] Invoke-BarmBuzz-OneShots: LCM then Network
+[*] LCM already configured (flag present).
+[*] Network already configured (flag present).
+[*] LCM already configured (skipping).
+[*] Network already configured (skipping).
+[+] Phase 1 complete.
+[+] Credentials loaded (hardcoded lab mode *** see warning in comments above ***).
+
+[Phase 2] Compile + Apply DSC...
+[*] Compiling -> DSC\\Outputs\\StudentBaseline
+[*] Compiling via Windows PowerShell 5.1 (GroupPolicyDsc requires it)...
+
+[+] Compilation complete.
+[*] Applying configuration (waits until complete)...
+InvalidOperation: PowerShell DSC resource DSC_DnsConnectionSuffix  failed to execute Test-TargetResource functionality with error message: Cannot validate argument on parameter 'ConnectionSpecificSuffix'. The argument is null or empty. Provide an argument that is not null or empty, and then try the command again.
+InvalidOperation: PowerShell DSC resource DSC_DnsConnectionSuffix  failed to execute Test-TargetResource functionality with error message: Cannot validate argument on parameter 'ConnectionSpecificSuffix'. The argument is null or empty. Provide an argument that is not null or empty, and then try the command again. 
+[+] Apply complete.
+
+[Phase 3] Validation...
+[*] Pester validation will be added later.
+
+[+] BUILD SUCCESS
+[*] Next steps (commit outputs + evidence):
+    git add DSC\Outputs Evidence
+    git commit -m \ Build 20260225_154918\
+**********************
+PowerShell transcript end
+End time: 20260225155144
+**********************

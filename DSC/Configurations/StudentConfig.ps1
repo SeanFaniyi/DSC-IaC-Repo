@@ -87,7 +87,6 @@ Configuration StudentBaseline {
 
         DnsConnectionSuffix DisableNatDnsRegistration {
             InterfaceAlias                 = $Node.InternalNetwork.InterfaceAlias
-            ConnectionSpecificSuffix       = ''
             RegisterThisConnectionsAddress = $false
             DependsOn                      = '[DnsServerAddress]Internal_SetDNS'
         }
@@ -153,6 +152,21 @@ Configuration StudentBaseline {
                 '[WindowsFeature]Feature_DNS',
                 '[PendingReboot]RebootCheck'
             )
+        }
+
+        # =========================
+        # ROOT DOMAIN OU's
+        # =========================
+
+        foreach ($OU in $Node.OrganizationalUnits) {
+            ADOrganizationalUnit "OU_$OU" {
+                Name                            = $OU
+                Path                            = "DC=barmbuzz,DC=corp"
+                Ensure                          = 'Present'
+                ProtectedFromAccidentalDeletion = $true
+                Credential                      = $DomainAdminCredential
+                DependsOn                       = '[ADDomain]CreateForest'
+            }
         }
     }
 }
