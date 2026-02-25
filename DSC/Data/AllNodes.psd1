@@ -68,11 +68,23 @@
                     GivenName = 'Schema'
                     Surname = 'Admin'
                     OU = 'BOL_Users'
-                }
+                },
                 @{
                     UserName = 'admin.domain'
                     GivenName = 'Domain'
                     Surname = 'Admin'
+                    OU = 'BOL_Users'
+                },
+                @{
+                    UserName = 'john.test'
+                    GivenName = 'John'
+                    Surname = 'Test'
+                    OU = 'BOL_Users'
+                },
+                @{
+                    UserName = 'amber.test'
+                    GivenName = 'Amber'
+                    Surname = 'Test'
                     OU = 'BOL_Users'
                 }
             )
@@ -82,13 +94,17 @@
                     Name = 'G_Enterprise_Admins'
                     Members = @('admin.enterprise')
                 },
-                                @{
+                @{
                     Name = 'G_Schema_Admins'
                     Members = @('admin.schema')
                 },
-                                @{
+                @{
                     Name = 'G_Domain_Admins'
                     Members = @('admin.domain')
+                },                
+                @{
+                    Name = 'G_No_Privileges'
+                    Members = @('john.test','amber.test')
                 }
             )
 
