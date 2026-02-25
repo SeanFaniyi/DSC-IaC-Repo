@@ -46,6 +46,14 @@
             PSDscAllowPlainTextPassword = $true           
             AllowDomainUser = $true
 
+            # --- OU's ---
+            OrganizationalUnits = @(
+                'Servers',
+                'Workstations',
+                'Users',
+                'Groups'
+            )
+
         }
     )
 }
