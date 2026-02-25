@@ -88,6 +88,7 @@ Configuration StudentBaseline {
         DnsConnectionSuffix DisableNatDnsRegistration {
             InterfaceAlias                 = $Node.InternalNetwork.InterfaceAlias
             RegisterThisConnectionsAddress = $false
+            ConnectionSpecificSuffix       = $Node.DomainName
             DependsOn                      = '[DnsServerAddress]Internal_SetDNS'
         }
         # --- Firewalls ---
@@ -166,6 +167,20 @@ Configuration StudentBaseline {
                 ProtectedFromAccidentalDeletion = $true
                 Credential                      = $DomainAdminCredential
                 DependsOn                       = '[ADDomain]CreateForest'
+            }
+        }
+
+        # --- Admin Groups ---
+
+        foreach ($group in $Node.AdminGroups) {
+            ADGroup "Group_$group" {
+                GroupName        = $group
+                GroupScope       = 'Global'
+                Category         = 'Security'
+                Path             = "OU=Groups,DC=barmbuzz,DC=corp"
+                Ensure           = 'Present'
+                Credential       = $DomainAdminCredential
+                DependsOn        = '[ADOrganizationalUnit]OU_Groups'
             }
         }
     }

@@ -54,6 +54,13 @@
                 'Groups'
             )
 
+               # --- Admin Groups---
+            AdminGroups = @(
+                'G_Enterprise_Admins',
+                'G_Schema_Admins',
+                'G_Domain_Admins'
+            )
+
         }
     )
 }
