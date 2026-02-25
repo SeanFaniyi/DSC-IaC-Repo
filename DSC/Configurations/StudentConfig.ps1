@@ -1,10 +1,24 @@
 Configuration StudentBaseline {
-    param()
+    param(
+
+    [Parameter(Mandatory = $true)]
+    [PSCredential]
+    $DomainAdminCredential,
+
+    [Parameter (Mandatory = $true)]
+    [PSCredential]
+    $DsrmCredential,
+
+    [Parameter(Mandatory = $true)]
+    [PSCredential]
+    $UserCredential
+
+    )
 
     Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName ComputerManagementDSC
-    Import-DscResource -Module NetworkingDsc
-    Import-DscResource -ModuleName ActivedirectoryDSC
+    Import-DscResource -ModuleName NetworkingDsc
+    Import-DscResource -ModuleName ActiveDirectoryDsc
 
 
     Node $AllNodes.NodeName {
@@ -13,6 +27,7 @@ Configuration StudentBaseline {
 
         Computer ComputerName {
             Name = $Node.ComputerName 
+            
         }
         # --- Time ---
 
@@ -38,15 +53,16 @@ Configuration StudentBaseline {
             InterfaceAlias = $Node.InternalNetwork.InterfaceAlias
             IPAddress      = $Node.InternalNetwork.IPAddress
             AddressFamily  = 'IPv4'
+            DependsOn      = '[Computer]ComputerName'
         }
-
-        DefaultGatewayAddress Internal_SetGateway {
-            InterfaceAlias = $Node.InternalNetwork.InterfaceAlias
-            Address        = $Node.InternalNetwork.DefaultGateway
-            AddressFamily  = 'IPv4'
-            DependsOn      = '[IPAddress]Internal_SetIP'
+        if ($Node.InternalNetwork.DefaultGateway) {
+            DefaultGatewayAddress Internal_SetGateway {
+                InterfaceAlias = $Node.InternalNetwork.InterfaceAlias
+                Address        = $Node.InternalNetwork.DefaultGateway
+                AddressFamily  = 'IPv4'
+                DependsOn      = '[IPAddress]Internal_SetIP'
+            }
         }
-
         NetConnectionProfile Internal_NetworkProfile {
             InterfaceAlias  = $Node.InternalNetwork.InterfaceAlias
             NetworkCategory = $Node.InternalNetwork.NetworkCategory
@@ -69,6 +85,12 @@ Configuration StudentBaseline {
             NetworkCategory = $Node.ExternalNetwork.NetworkCategory
         }
 
+        DnsConnectionSuffix DisableNatDnsRegistration {
+            InterfaceAlias                 = $Node.InternalNetwork.InterfaceAlias
+            ConnectionSpecificSuffix       = ''
+            RegisterThisConnectionsAddress = $false
+            DependsOn                      = '[DnsServerAddress]Internal_SetDNS'
+        }
         # --- Firewalls ---
 
         FirewallProfile SetPrivateFirewall {
@@ -113,6 +135,24 @@ Configuration StudentBaseline {
         # --- Reboot Checks ---
         PendingReboot RebootCheck {
             Name = 'PostBaselineRebootChecks'
+        }
+
+        # =========================
+        # PROMOTION TO DOMAIN CONTROLLER
+        # =========================
+
+        ADDomain CreateForest {
+            DomainName = $Node.DomainName
+            DomainNetBiosName = $Node.DomainNetBiosName
+            Credential = $DomainAdminCredential
+            SafeModeAdministratorPassword =  $DsrmCredential
+            ForestMode = $Node.ForestMode
+            DomainMode = $Node.DomainMode
+            DependsOn = @(
+                '[WindowsFeature]ADDSRole',
+                '[WindowsFeature]Feature_DNS',
+                '[PendingReboot]RebootCheck'
+            )
         }
     }
 }

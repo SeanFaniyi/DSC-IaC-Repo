@@ -9,7 +9,7 @@
             DomainName   = 'barmbuzz.corp'
 
             # --- AD Settings ---
-            DomainNetbiosName = 'BARMBUZZ'
+            DomainNetBiosName = 'BARMBUZZ'
             ForestMode = 'WinThreshold'
             DomainMode = 'WinThreshold'
             
@@ -22,7 +22,7 @@
             InternalNetwork = @{
                 InterfaceAlias = 'Ethernet 2'
                 IPAddress      = '192.168.10.10/24'
-                DefaultGateway = '192.168.10.1'
+                DefaultGateway = $null
                 DNSServers     = @('127.0.0.1')
                 NetworkCategory = 'Private'
             }
@@ -30,6 +30,8 @@
             ExternalNetwork = @{
                 InterfaceAlias = 'Ethernet' 
                 NetworkCategory = 'Private'
+                DisableDNSRegistrationOnNAT = $true
+
             }
             
             # --- Services ---
@@ -39,6 +41,11 @@
                 'DNS',
                 'RSAT-AD-Tools'
             )
+
+            # --- Security ---
+            AllowPlainTextPassword = $true
+            AllowDomainUser = $true
+
         }
     )
 }
