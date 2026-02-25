@@ -63,10 +63,13 @@ Configuration StudentBaseline {
                 DependsOn      = '[IPAddress]Internal_SetIP'
             }
         }
-        NetConnectionProfile Internal_NetworkProfile {
-            InterfaceAlias  = $Node.InternalNetwork.InterfaceAlias
-            NetworkCategory = $Node.InternalNetwork.NetworkCategory
-            DependsOn       = '[IPAddress]Internal_SetIP'
+
+        if ($Node.Role -ne 'RootDC') {
+            NetConnectionProfile Internal_NetworkProfile {
+                InterfaceAlias  = $Node.InternalNetwork.InterfaceAlias
+                NetworkCategory = $Node.InternalNetwork.NetworkCategory
+                DependsOn       = '[IPAddress]Internal_SetIP'
+            }
         }
 
         DnsServerAddress Internal_SetDNS {
@@ -79,10 +82,11 @@ Configuration StudentBaseline {
         # =========================
         # NETWORK — EXTERNAL NIC
         # =========================
-
-        NetConnectionProfile External_NetworkProfile {
-            InterfaceAlias  = $Node.ExternalNetwork.InterfaceAlias
-            NetworkCategory = $Node.ExternalNetwork.NetworkCategory
+        if ($Node.Role -ne 'RootDC') {
+            NetConnectionProfile External_NetworkProfile {
+                InterfaceAlias  = $Node.ExternalNetwork.InterfaceAlias
+                NetworkCategory = $Node.ExternalNetwork.NetworkCategory
+            }
         }
 
         DnsConnectionSuffix DisableNatDnsRegistration {
@@ -189,24 +193,22 @@ Configuration StudentBaseline {
         # --- Admin Groups ---
 
         foreach ($group in $Node.AdminGroups) {
-        ADGroup "Group_$($group.Name)" {
-            GroupName  = $group.Name
-            GroupScope = 'Global'
-            Category   = 'Security'
-            Path       = "OU=Groups,DC=barmbuzz,DC=corp"
-            Ensure     = 'Present'
-            Credential = $DomainAdminCredential
-            DependsOn  = '[ADOrganizationalUnit]OU_Groups'
-        }
+            ADGroup "Group_$($group.Name)" {
+            GroupName        = $group.Name
+            GroupScope       = 'Global'
+            Category         = 'Security'
+            Path             = "OU=Groups,DC=barmbuzz,DC=corp"
+            Ensure           = 'Present'
+            MembersToInclude = $group.Members
+            Credential       = $DomainAdminCredential
+            DependsOn = @(
+                '[ADOrganizationalUnit]OU_Groups',
+                '[ADUser]User_admin.enterprise',
+                '[ADUser]User_admin.schema',
+                '[ADUser]User_admin.domain'
+            )           
 
-            ADGroup "GroupMembers_$($group.Name)" {
-                GroupName        = $group.Name
-                MembersToInclude = $group.Members
-                Credential       = $DomainAdminCredential
-                DependsOn        = @(
-                    "[ADGroup]Group_$($group.Name)"
-                )
             }
-        }   
+        }
     }
 }

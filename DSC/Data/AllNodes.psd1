@@ -69,8 +69,8 @@
                     OU = 'Users'
                 }
                 @{
-                    UserName = 'admin.schema'
-                    GivenName = 'Schema'
+                    UserName = 'admin.domain'
+                    GivenName = 'Domain'
                     Surname = 'Admin'
                     OU = 'Users'
                 }

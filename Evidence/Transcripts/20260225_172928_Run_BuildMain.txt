@@ -1,0 +1,82 @@
+**********************
+PowerShell transcript start
+Start time: 20260225172928
+Username: BARMBUZZ\Administrator
+RunAs User: BARMBUZZ\Administrator
+Configuration Name: 
+Machine: BB-DC01 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -WorkingDirectory ~
+Process ID: 7588
+PSVersion: 7.5.4
+PSEdition: Core
+GitCommitId: 7.5.4
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[+] Transcript started: Evidence\\Transcripts\\20260225_172928_Run_BuildMain.txt
+[+] Admin privileges confirmed.
+
+[Phase 1] Prerequisites...
+[*] Invoke-BarmBuzz-OneShots: LCM then Network
+[*] LCM already configured (flag present).
+[*] Network already configured (flag present).
+[*] LCM already configured (skipping).
+[*] Network already configured (skipping).
+[+] Phase 1 complete.
+[+] Credentials loaded (hardcoded lab mode *** see warning in comments above ***).
+
+[Phase 2] Compile + Apply DSC...
+[*] Compiling -> DSC\\Outputs\\StudentBaseline
+[*] Compiling via Windows PowerShell 5.1 (GroupPolicyDsc requires it)...
+
+[+] Compilation complete.
+[*] Applying configuration (waits until complete)...
+PermissionDenied: Unable to set the NetworkCategory due to one of the following possible reasons: not running PowerShell elevated; the NetworkCategory cannot be changed from 'DomainAuthenticated'; user initiated changes to NetworkCategory are being prevented due to the Group Policy setting 'Network List Manager Policies'.
+PermissionDenied: Unable to set the NetworkCategory due to one of the following possible reasons: not running PowerShell elevated; the NetworkCategory cannot be changed from 'DomainAuthenticated'; user initiated changes to NetworkCategory are being prevented due to the Group Policy setting 'Network List Manager Policies'.
+InvalidOperation: The PowerShell DSC resource '[NetConnectionProfile]External_NetworkProfile' with SourceInfo 'C:\Users\Administrator\DSC-IaC-Repo\DSC\Configurations\StudentConfig.ps1::86::9::NetConnectionProfile' threw one or more non-terminating errors while running the Set-TargetResource functionality. These errors are logged to the ETW channel called Microsoft-Windows-DSC/Operational. Refer to this channel for more details.
+InvalidOperation: The PowerShell DSC resource '[NetConnectionProfile]External_NetworkProfile' with SourceInfo 'C:\Users\Administrator\DSC-IaC-Repo\DSC\Configurations\StudentConfig.ps1::86::9::NetConnectionProfile' threw one or more non-terminating errors while running the Set-TargetResource functionality. These errors are logged to the ETW channel called Microsoft-Windows-DSC/Operational. Refer to this channel for more details.
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Set-TargetResource functionality with error message: System.InvalidOperationException: Error adding OU 'Users'. (ADOU0015) ---> Microsoft.ActiveDirectory.Management.ADException: An attempt was made to add an object to the directory with a name that is already in use ---> System.ServiceModel.FaultException: The supplied entry already exists.
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowExceptionForExtendedError(String extendedErrorMessage, Exception innerException)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowExceptionForErrorCode(String message, String errorCode, String extendedErrorMessage, Exception innerException)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowExceptionForFaultDetail(FaultDetail faultDetail, FaultException faultException)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowException(AdwsFault adwsFault, FaultException faultException)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Create(ADAddRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Add(ADSessionHandle handle, ADAddRequest request)
+   at Microsoft.ActiveDirectory.Management.ADActiveObject.Create()
+   at Microsoft.ActiveDirectory.Management.Commands.ADNewCmdletBase`3.ADNewCmdletBaseProcessCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.ProcessRecord()
+   --- End of inner exception stack trace ---
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Set-TargetResource functionality with error message: System.InvalidOperationException: Error adding OU 'Users'. (ADOU0015) ---> Microsoft.ActiveDirectory.Management.ADException: An attempt was made to add an object to the directory with a name that is already in use ---> System.ServiceModel.FaultException: The supplied entry already exists.
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowExceptionForExtendedError(String extendedErrorMessage, Exception innerException)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowExceptionForErrorCode(String message, String errorCode, String extendedErrorMessage, Exception innerException)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowExceptionForFaultDetail(FaultDetail faultDetail, FaultException faultException)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowException(AdwsFault adwsFault, FaultException faultException)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Create(ADAddRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Add(ADSessionHandle handle, ADAddRequest request)
+   at Microsoft.ActiveDirectory.Management.ADActiveObject.Create()
+   at Microsoft.ActiveDirectory.Management.Commands.ADNewCmdletBase`3.ADNewCmdletBaseProcessCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.ProcessRecord()
+   --- End of inner exception stack trace --- 
+CimException: The SendConfigurationApply function did not succeed.
+CimException: The SendConfigurationApply function did not succeed.
+[+] Apply complete.
+
+[Phase 3] Validation...
+[*] Pester validation will be added later.
+
+[+] BUILD SUCCESS
+[*] Next steps (commit outputs + evidence):
+    git add DSC\Outputs Evidence
+    git commit -m \ Build 20260225_172928\
+**********************
+PowerShell transcript end
+End time: 20260225172958
+**********************
