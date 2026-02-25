@@ -49,10 +49,10 @@
 
             # --- OU's ---
             OrganizationalUnits = @(
-                'Servers',
-                'Workstations',
-                'Users',
-                'Groups'
+                'BOL_Servers',
+                'BOL_Workstations',
+                'BOL_Users',
+                'BOL_Admin_Groups'
             )
 
             # --- Users ---
@@ -61,18 +61,19 @@
                     UserName = 'admin.enterprise'
                     GivenName = 'Enterprise'
                     Surname = 'Admin'
+                    OU = 'BOL_Users'
                 }
                 @{
                     UserName = 'admin.schema'
                     GivenName = 'Schema'
                     Surname = 'Admin'
-                    OU = 'Users'
+                    OU = 'BOL_Users'
                 }
                 @{
                     UserName = 'admin.domain'
                     GivenName = 'Domain'
                     Surname = 'Admin'
-                    OU = 'Users'
+                    OU = 'BOL_Users'
                 }
             )
                         # --- Admin Groups---

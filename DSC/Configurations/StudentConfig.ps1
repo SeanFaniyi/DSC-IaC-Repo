@@ -120,6 +120,7 @@ Configuration StudentBaseline {
             WindowsFeature ADDSRole {
                 Name   = 'AD-Domain-Services'
                 Ensure = 'Present'
+                DependsOn = '[Computer]ComputerName'            
             }
         }
 
@@ -127,6 +128,7 @@ Configuration StudentBaseline {
             WindowsFeature "Feature_$feature" {
                 Name   = $feature
                 Ensure = 'Present'
+                DependsOn = '[WindowsFeature]ADDSRole'
             }
         }
 
@@ -187,30 +189,45 @@ Configuration StudentBaseline {
                 DomainName = $Node.DomainName
                 Path       = "OU=$($user.OU),DC=barmbuzz,DC=corp"
                 Credential = $DomainAdminCredential
-                DependsOn  = '[ADOrganizationalUnit]OU_Users'
+                DependsOn  = @(
+                '[ADOrganizationalUnit]OU_BOL_Users', 
+                '[ADDomain]CreateForest',
+                '[ADDomainDefaultPasswordPolicy]RelaxDefaultPolicy'
+                )
             }
         }
 
-
         # --- Admin Groups ---
-
+            
         foreach ($group in $Node.AdminGroups) {
             ADGroup "Group_$($group.Name)" {
             GroupName        = $group.Name
             GroupScope       = 'Global'
             Category         = 'Security'
-            Path             = "OU=Groups,DC=barmbuzz,DC=corp"
+            Path             = "OU=BOL_Admin_Groups,DC=barmbuzz,DC=corp"
             Ensure           = 'Present'
             MembersToInclude = $group.Members
             Credential       = $DomainAdminCredential
             DependsOn = @(
-                '[ADOrganizationalUnit]OU_Groups',
+                '[ADOrganizationalUnit]OU_BOL_Admin_Groups',
                 '[ADUser]User_admin.enterprise',
                 '[ADUser]User_admin.schema',
                 '[ADUser]User_admin.domain'
-            )           
-
+            )      
             }
         }
+        # Relax the global password policy scope. 
+        # FGPP will be implemented for admins.
+        ADDomainDefaultPasswordPolicy RelaxDefaultPolicy {
+            DomainName                  = $Node.DomainName
+            ComplexityEnabled           = $false
+            MinPasswordLength           = 6
+            PasswordHistoryCount        = 0
+            Credential                  = $DomainAdminCredential
+            DependsOn                   = '[ADDomain]CreateForest'
+        }
+
+
+
     }
 }
