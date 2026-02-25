@@ -227,7 +227,24 @@ Configuration StudentBaseline {
             DependsOn                   = '[ADDomain]CreateForest'
         }
 
-
-
+        ADFineGrainedPasswordPolicy StrongerAdminPasswordPolicy{
+            Name                        = 'BOL_Stronger_Admin_Password_Policy'
+            Precedence                  = 1 # High priority over other FGP Policies
+            ComplexityEnabled           = $true # Ensure it has special character/numbers etc
+            MinPasswordLength           = 12 
+            PasswordHistoryCount        = 24
+            MinPasswordAge              = '00:01:00'    # Can change password after 1 day
+            MaxPasswordAge              = '90.00:00:00' # Expires in 90 days
+            LockoutThreshold            = 5    # Num of Attempts
+            LockoutDuration             = '00:30:00'
+            LockoutObservationWindow    = '00:30:00'
+            Subjects                    = @(
+                'G_Enterprise_Admins',
+                'G_Schema_Admins',
+                'G_Domain_Admins'
+            )
+            Credential                  = $DomainAdminCredential
+            DependsOn                   = '[ADGroup]Group_G_Enterprise_Admins'
+        }
     }
 }
