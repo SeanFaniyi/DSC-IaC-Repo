@@ -170,18 +170,43 @@ Configuration StudentBaseline {
             }
         }
 
+        # --- User Creation ---
+        foreach ($user in $Node.Users) {
+            ADUser "User_$($user.UserName)" {
+                UserName   = $user.UserName
+                GivenName  = $user.GivenName
+                Surname    = $user.Surname
+                Ensure     = 'Present'
+                Password   = $UserCredential
+                DomainName = $Node.DomainName
+                Path       = "OU=$($user.OU),DC=barmbuzz,DC=corp"
+                Credential = $DomainAdminCredential
+                DependsOn  = '[ADOrganizationalUnit]OU_Users'
+            }
+        }
+
+
         # --- Admin Groups ---
 
         foreach ($group in $Node.AdminGroups) {
-            ADGroup "Group_$group" {
-                GroupName        = $group
-                GroupScope       = 'Global'
-                Category         = 'Security'
-                Path             = "OU=Groups,DC=barmbuzz,DC=corp"
-                Ensure           = 'Present'
-                Credential       = $DomainAdminCredential
-                DependsOn        = '[ADOrganizationalUnit]OU_Groups'
-            }
+        ADGroup "Group_$($group.Name)" {
+            GroupName  = $group.Name
+            GroupScope = 'Global'
+            Category   = 'Security'
+            Path       = "OU=Groups,DC=barmbuzz,DC=corp"
+            Ensure     = 'Present'
+            Credential = $DomainAdminCredential
+            DependsOn  = '[ADOrganizationalUnit]OU_Groups'
         }
+
+            ADGroup "GroupMembers_$($group.Name)" {
+                GroupName        = $group.Name
+                MembersToInclude = $group.Members
+                Credential       = $DomainAdminCredential
+                DependsOn        = @(
+                    "[ADGroup]Group_$($group.Name)"
+                )
+            }
+        }   
     }
 }

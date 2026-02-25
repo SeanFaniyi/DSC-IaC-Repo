@@ -39,7 +39,8 @@
             WinRMService = $true
             WindowsFeatures = @(
                 'DNS',
-                'RSAT-AD-Tools'
+                'RSAT-AD-Tools',
+                'RSAT-ADDS'
             )
 
             # --- Security ---
@@ -54,11 +55,40 @@
                 'Groups'
             )
 
-               # --- Admin Groups---
+            # --- Users ---
+            Users = @(
+                @{
+                    UserName = 'admin.enterprise'
+                    GivenName = 'Enterprise'
+                    Surname = 'Admin'
+                }
+                @{
+                    UserName = 'admin.schema'
+                    GivenName = 'Schema'
+                    Surname = 'Admin'
+                    OU = 'Users'
+                }
+                @{
+                    UserName = 'admin.schema'
+                    GivenName = 'Schema'
+                    Surname = 'Admin'
+                    OU = 'Users'
+                }
+            )
+                        # --- Admin Groups---
             AdminGroups = @(
-                'G_Enterprise_Admins',
-                'G_Schema_Admins',
-                'G_Domain_Admins'
+                @{
+                    Name = 'G_Enterprise_Admins'
+                    Members = @('admin.enterprise')
+                },
+                                @{
+                    Name = 'G_Schema_Admins'
+                    Members = @('admin.schema')
+                },
+                                @{
+                    Name = 'G_Domain_Admins'
+                    Members = @('admin.domain')
+                }
             )
 
         }
