@@ -21,7 +21,7 @@ Configuration StudentBaseline {
     Import-DscResource -ModuleName ActiveDirectoryDsc
 
 
-    Node $AllNodes.NodeName {
+    Node $AllNodes.Where({ $_.Role -eq 'RootDC' }).NodeName {
 
         # --- Identity ---
 
@@ -63,7 +63,8 @@ Configuration StudentBaseline {
                 DependsOn      = '[IPAddress]Internal_SetIP'
             }
         }
-
+        
+        # Redundant but for future nodes. 
         if ($Node.Role -ne 'RootDC') {
             NetConnectionProfile Internal_NetworkProfile {
                 InterfaceAlias  = $Node.InternalNetwork.InterfaceAlias
@@ -82,6 +83,7 @@ Configuration StudentBaseline {
         # =========================
         # NETWORK — EXTERNAL NIC
         # =========================
+        # Redundant but for future nodes. 
         if ($Node.Role -ne 'RootDC') {
             NetConnectionProfile External_NetworkProfile {
                 InterfaceAlias  = $Node.ExternalNetwork.InterfaceAlias
