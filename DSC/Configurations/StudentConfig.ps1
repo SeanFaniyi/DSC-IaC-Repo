@@ -289,4 +289,130 @@ Configuration StudentBaseline {
             PsDscRunAsCredential = $DomainAdminCredential
         }
     }
+    Node $AllNodes.Where({ $_.Role -eq 'ChildDC' }).NodeName {
+
+    # --- Identity ---
+    Computer ComputerName {
+        Name = $Node.ComputerName
+    }
+
+    # --- Time ---
+    TimeZone TimeZone {
+        IsSingleInstance = 'Yes'
+        TimeZone         = $Node.TimeZone
+    }
+
+    if ($Node.EnsureW32TimeService) {
+        Service WindowsTimeService {
+            Name        = 'W32Time'
+            State       = 'Running'
+            StartupType = 'Automatic'
+            DependsOn   = '[TimeZone]TimeZone'
+        }
+    }
+
+    # =========================
+    # NETWORK — INTERNAL NIC
+    # =========================
+
+    IPAddress Internal_SetIP {
+        InterfaceAlias = $Node.InternalNetwork.InterfaceAlias
+        IPAddress      = $Node.InternalNetwork.IPAddress
+        AddressFamily  = 'IPv4'
+        DependsOn      = '[Computer]ComputerName'
+    }
+
+    if ($Node.InternalNetwork.DefaultGateway) {
+        DefaultGatewayAddress Internal_SetGateway {
+            InterfaceAlias = $Node.InternalNetwork.InterfaceAlias
+            Address        = $Node.InternalNetwork.DefaultGateway
+            AddressFamily  = 'IPv4'
+            DependsOn      = '[IPAddress]Internal_SetIP'
+        }
+    }
+
+    DnsServerAddress Internal_SetDNS {
+        InterfaceAlias = $Node.InternalNetwork.InterfaceAlias
+        AddressFamily  = 'IPv4'
+        Address        = $Node.InternalNetwork.DNSServers
+        DependsOn      = '[IPAddress]Internal_SetIP'
+    }
+
+    # =========================
+    # NETWORK — EXTERNAL NIC
+    # =========================
+
+    DnsConnectionSuffix DisableNatDnsRegistration {
+        InterfaceAlias                 = $Node.InternalNetwork.InterfaceAlias
+        RegisterThisConnectionsAddress = $false
+        ConnectionSpecificSuffix       = $Node.DomainName
+        DependsOn                      = '[DnsServerAddress]Internal_SetDNS'
+    }
+
+    # --- Firewalls ---
+    FirewallProfile SetPrivateFirewall {
+        Name    = 'Private'
+        Enabled = 'True'
+    }
+
+    FirewallProfile SetPublicFirewall {
+        Name    = 'Public'
+        Enabled = 'True'
+    }
+
+    FirewallProfile SetDomainFirewall {
+        Name    = 'Domain'
+        Enabled = 'True'
+    }
+
+    # --- Services ---
+    if ($Node.InstallADDSRole) {
+        WindowsFeature ADDSRole {
+            Name      = 'AD-Domain-Services'
+            Ensure    = 'Present'
+            DependsOn = '[Computer]ComputerName'
+        }
+    }
+
+    foreach ($feature in $Node.WindowsFeatures) {
+        WindowsFeature "Feature_$feature" {
+            Name      = $feature
+            Ensure    = 'Present'
+            DependsOn = '[WindowsFeature]ADDSRole'
+        }
+    }
+
+    if ($Node.WinRMService) {
+        Service WinRMService {
+            Name        = 'WinRM'
+            State       = 'Running'
+            StartupType = 'Automatic'
+        }
+    }
+
+    # --- Reboot Checks ---
+    PendingReboot RebootCheck {
+        Name      = 'PostBaselineRebootChecks'
+        DependsOn = '[WindowsFeature]ADDSRole'
+    }
+
+    # =========================
+    # PROMOTION TO CHILD DOMAIN CONTROLLER
+    # =========================
+
+    ADDomain CreateChildDomain {
+        DomainName                    = 'derby'
+        ParentDomainName              = $Node.ParentDomainName
+        Credential                    = $DomainAdminCredential
+        SafeModeAdministratorPassword = $DsrmCredential
+        ForestMode                    = $Node.ForestMode
+        DomainMode                    = $Node.DomainMode
+        DependsOn                     = @(
+            '[WindowsFeature]ADDSRole',
+            '[WindowsFeature]Feature_DNS',
+            '[PendingReboot]RebootCheck'
+        )
+    }
+
+}
 }

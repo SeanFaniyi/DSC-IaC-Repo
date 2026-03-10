@@ -1,0 +1,10 @@
+Leap Indicator: 0(no warning)
+Stratum: 1 (primary reference - syncd by radio clock)
+Precision: -23 (119.209ns per tick)
+Root Delay: 0.0000000s
+Root Dispersion: 10.0000000s
+ReferenceId: 0x4C4F434C (source name:  "LOCL")
+Last Successful Sync Time: 3/10/2026 10:12:17 AM
+Source: Local CMOS Clock
+Poll Interval: 6 (64s)
+

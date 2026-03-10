@@ -108,6 +108,49 @@
                 }
             )
 
+        },
+        @{
+            NodeName   = 'BB-DER-DC01'
+            Role       = 'ChildDC'
+            
+            # --- Identity ---
+            ComputerName      = 'BB-DER-DC01'
+            DomainName        = 'derby.barmbuzz.corp'
+            DomainNetBiosName = 'DERBY'
+            ParentDomainName  = 'barmbuzz.corp'
+            ForestMode        = 'WinThreshold'
+            DomainMode        = 'WinThreshold'
+
+            # --- Time ---
+            TimeZone             = 'GMT Standard Time'
+            EnsureW32TimeService = $true
+
+            # --- Network ---
+            InternalNetwork = @{
+                InterfaceAlias  = 'Ethernet 2'
+                IPAddress       = '192.168.20.10/24'
+                DefaultGateway  = $null
+                DNSServers      = @('192.168.10.10')
+                NetworkCategory = 'Private'
+            }
+            ExternalNetwork = @{
+                InterfaceAlias  = 'Ethernet'
+                NetworkCategory = 'Private'
+                DisableDNSRegistrationOnNAT = $true
+            }
+
+            # --- Services ---
+            InstallADDSRole = $true
+            WinRMService    = $true
+            WindowsFeatures = @(
+                'DNS',
+                'RSAT-AD-Tools',
+                'RSAT-ADDS'
+            )
+
+            # --- Security ---
+            PSDscAllowPlainTextPassword = $true
+            AllowDomainUser             = $true
         }
     )
 }
