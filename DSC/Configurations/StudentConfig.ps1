@@ -115,7 +115,6 @@ Configuration StudentBaseline {
         }
 
         # --- Services ---
-
         if ($Node.InstallADDSRole) {
             WindowsFeature ADDSRole {
                 Name   = 'AD-Domain-Services'
@@ -164,8 +163,10 @@ Configuration StudentBaseline {
         }
 
         # =========================
-        # ROOT DOMAIN OU's
+        # IDENTITY PLAIN
         # =========================
+
+        # --- OU's ---
 
         foreach ($OU in $Node.OrganizationalUnits) {
             ADOrganizationalUnit "OU_$OU" {
@@ -216,8 +217,12 @@ Configuration StudentBaseline {
             )      
             }
         }
+
         # Relax the global password policy scope. 
         # FGPP will be implemented for admins.
+
+        # --- Password Policy ---
+
         ADDomainDefaultPasswordPolicy RelaxDefaultPolicy {
             DomainName                  = $Node.DomainName
             ComplexityEnabled           = $false
@@ -245,6 +250,43 @@ Configuration StudentBaseline {
             )
             Credential                  = $DomainAdminCredential
             DependsOn                   = '[ADGroup]Group_G_Enterprise_Admins'
+        }
+
+        
+        # GPO Idle Time
+        Script GPO_IdleTimeout {
+            GetScript = {
+                $gpo = Get-GPO -Name 'BOL_IdleTimedout' -ErrorAction SilentlyContinue
+                return @{ Result = if ($gpo) { 'Present' } else { 'Absent' } }
+                # Set result to true if found.
+            }
+            TestScript = {
+                $gpo = Get-GPO -Name 'BOL_IdleTimedout' -ErrorAction SilentlyContinue
+                return ($null -ne $gpo)
+            }
+            SetScript = {
+                # Creates the actual GPO here
+                New-GPO -Name 'BOL_IdleTimedout'
+
+                # Set screen saver timeout to 5 minutes (300 seconds)
+                Set-GPRegistryValue -Name 'BOL_IdleTimedout' `
+                    -Key 'HKCU\Software\Policies\Microsoft\Windows\Control Panel\Desktop' `
+                    -ValueName 'ScreenSaveTimeOut' `
+                    -Type String -Value '300'
+
+                # Force the screen saver to be enabled
+                Set-GPRegistryValue -Name 'BOL_IdleTimedout' `
+                    -Key 'HKCU\Software\Policies\Microsoft\Windows\Control Panel\Desktop' `
+                    -ValueName 'ScreenSaveActive' `
+                    -Type String -Value '1'
+
+                # Link it to your users OU
+                New-GPLink -Name 'BOL_IdleTimedout' `
+                    -Target 'OU=BOL_Users,DC=barmbuzz,DC=corp' `
+                    -LinkEnabled Yes
+            }
+            DependsOn = '[ADDomain]CreateForest'
+            PsDscRunAsCredential = $DomainAdminCredential
         }
     }
 }

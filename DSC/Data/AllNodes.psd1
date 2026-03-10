@@ -5,7 +5,7 @@
             Role       = 'RootDC'
 
             # --- Identity ---
-            ComputerName = 'BB-DC01'
+            ComputerName = 'BB-BOL-DC01'
             DomainName   = 'barmbuzz.corp'
 
             # --- AD Settings ---
