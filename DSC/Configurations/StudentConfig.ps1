@@ -16,9 +16,9 @@ Configuration StudentBaseline {
     )
 
     $ChildDomainCredential = New-Object System.Management.Automation.PSCredential(
-    "Administrator@barmbuzz.corp",
-    $DomainAdminCredential.Password
-)
+        "Administrator@derby.barmbuzz.corp",
+        $DomainAdminCredential.Password
+    )
 
     Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName ComputerManagementDSC
@@ -410,5 +410,18 @@ Configuration StudentBaseline {
             '[PendingReboot]RebootCheck'
         )
     }
+
+        foreach ($ou in $Node.OrganizationalUnits) {
+        ADOrganizationalUnit "OU_$($ou.Name)" {
+            Name                            = $ou.Name
+            Path                            = $ou.Path
+            Ensure                          = 'Present'
+            ProtectedFromAccidentalDeletion = $true
+            Credential                      = $ChildDomainCredential
+            DomainController                = $Node.DomainController
+            DependsOn                       = '[ADDomain]CreateChildDomain'
+        }
+    }
+
     }
 }

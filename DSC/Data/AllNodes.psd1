@@ -110,12 +110,15 @@
 
         },
         @{
-            NodeName   = 'BB-DER-DC01'
+            NodeName   = 'BB-DER-DC01' # COMMENTED FOR DERBY DC01
+            # NodeName   = 'localhost' 
             Role       = 'ChildDC'
             
             # --- Identity ---
             ComputerName      = 'BB-DER-DC01'
             DomainName        = 'derby.barmbuzz.corp'
+            DomainController  = 'BB-DER-DC01.derby.barmbuzz.corp'
+            ChildDomainName   = 'derby'
             DomainNetBiosName = 'DERBY'
             ParentDomainName  = 'barmbuzz.corp'
             ForestMode        = 'WinThreshold'
@@ -150,7 +153,27 @@
 
             # --- Security ---
             PSDscAllowPlainTextPassword = $true
-            AllowDomainUser             = $true
+            PSDscAllowDomainUser        = $true
+    
+    
+            # --- OU's ---
+            OrganizationalUnits = @(
+                @{ Name = 'DER_Users';            Path = 'DC=derby,DC=barmbuzz,DC=corp' }
+                @{ Name = 'DER_Staff';            Path = 'OU=DER_Users,DC=derby,DC=barmbuzz,DC=corp' }
+                @{ Name = 'DER_Admins';           Path = 'OU=DER_Users,DC=derby,DC=barmbuzz,DC=corp' }
+                @{ Name = 'DER_Computers';        Path = 'DC=derby,DC=barmbuzz,DC=corp' }
+                @{ Name = 'DER_Workstations';     Path = 'OU=DER_Computers,DC=derby,DC=barmbuzz,DC=corp' }
+                @{ Name = 'DER_Servers';          Path = 'OU=DER_Computers,DC=derby,DC=barmbuzz,DC=corp' }
+                @{ Name = 'DER_Groups';           Path = 'DC=derby,DC=barmbuzz,DC=corp' }
+                @{ Name = 'DER_BusinessRoles';    Path = 'OU=DER_Groups,DC=derby,DC=barmbuzz,DC=corp' }
+                @{ Name = 'DER_PermissionGroups'; Path = 'OU=DER_Groups,DC=derby,DC=barmbuzz,DC=corp' }
+                @{ Name = 'DER_AdminTiers';       Path = 'OU=DER_Groups,DC=derby,DC=barmbuzz,DC=corp' }
+                @{ Name = 'DER_Nottingham';       Path = 'DC=derby,DC=barmbuzz,DC=corp' }
+                @{ Name = 'DER_NottinghamUsers';  Path = 'OU=DER_Nottingham,DC=derby,DC=barmbuzz,DC=corp' }
+                @{ Name = 'DER_NottinghamComputers';   Path = 'OU=DER_Nottingham,DC=derby,DC=barmbuzz,DC=corp' }
+            )
+            
+    
         }
     )
-}
+    }
