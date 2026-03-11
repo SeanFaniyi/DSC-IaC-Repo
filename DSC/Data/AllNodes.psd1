@@ -128,7 +128,7 @@
             # --- Network ---
             InternalNetwork = @{
                 InterfaceAlias  = 'Ethernet 2'
-                IPAddress       = '192.168.20.10/24'
+                IPAddress       = '192.168.10.20/24'
                 DefaultGateway  = $null
                 DNSServers      = @('192.168.10.10')
                 NetworkCategory = 'Private'

@@ -15,6 +15,11 @@ Configuration StudentBaseline {
 
     )
 
+    $ChildDomainCredential = New-Object System.Management.Automation.PSCredential(
+    "Administrator@barmbuzz.corp",
+    $DomainAdminCredential.Password
+)
+
     Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName ComputerManagementDSC
     Import-DscResource -ModuleName NetworkingDsc
@@ -322,15 +327,6 @@ Configuration StudentBaseline {
         DependsOn      = '[Computer]ComputerName'
     }
 
-    if ($Node.InternalNetwork.DefaultGateway) {
-        DefaultGatewayAddress Internal_SetGateway {
-            InterfaceAlias = $Node.InternalNetwork.InterfaceAlias
-            Address        = $Node.InternalNetwork.DefaultGateway
-            AddressFamily  = 'IPv4'
-            DependsOn      = '[IPAddress]Internal_SetIP'
-        }
-    }
-
     DnsServerAddress Internal_SetDNS {
         InterfaceAlias = $Node.InternalNetwork.InterfaceAlias
         AddressFamily  = 'IPv4'
@@ -343,7 +339,7 @@ Configuration StudentBaseline {
     # =========================
 
     DnsConnectionSuffix DisableNatDnsRegistration {
-        InterfaceAlias                 = $Node.InternalNetwork.InterfaceAlias
+        InterfaceAlias                 = $Node.ExternalNetwork.InterfaceAlias
         RegisterThisConnectionsAddress = $false
         ConnectionSpecificSuffix       = $Node.DomainName
         DependsOn                      = '[DnsServerAddress]Internal_SetDNS'
@@ -399,20 +395,20 @@ Configuration StudentBaseline {
     # =========================
     # PROMOTION TO CHILD DOMAIN CONTROLLER
     # =========================
-
+    
     ADDomain CreateChildDomain {
-        DomainName                    = 'derby'
+        DomainName                    = $Node.ChildDomainName
         ParentDomainName              = $Node.ParentDomainName
-        Credential                    = $DomainAdminCredential
+        Credential = $ChildDomainCredential
         SafeModeAdministratorPassword = $DsrmCredential
         ForestMode                    = $Node.ForestMode
         DomainMode                    = $Node.DomainMode
-        DependsOn                     = @(
+
+        DependsOn = @(
             '[WindowsFeature]ADDSRole',
             '[WindowsFeature]Feature_DNS',
             '[PendingReboot]RebootCheck'
         )
     }
-
-}
+    }
 }
