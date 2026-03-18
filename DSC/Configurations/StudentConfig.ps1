@@ -411,15 +411,15 @@ Configuration StudentBaseline {
         )
     }
 
-        foreach ($ou in $Node.OrganizationalUnits) {
-        ADOrganizationalUnit "OU_$($ou.Name)" {
-            Name                            = $ou.Name
-            Path                            = $ou.Path
-            Ensure                          = 'Present'
-            ProtectedFromAccidentalDeletion = $true
-            Credential                      = $ChildDomainCredential
-            DomainController                = $Node.DomainController
-            DependsOn                       = '[ADDomain]CreateChildDomain'
+    foreach ($ou in $Node.OrganizationalUnits) {
+    ADOrganizationalUnit "OU_$($ou.Name)" {
+        Name                            = $ou.Name
+        Path                            = $ou.Path
+        Ensure                          = 'Present'
+        ProtectedFromAccidentalDeletion = $true
+        Credential                      = $ChildDomainCredential
+        DomainController                = $Node.DomainController
+        DependsOn                       = '[ADDomain]CreateChildDomain'
         }
     }
 

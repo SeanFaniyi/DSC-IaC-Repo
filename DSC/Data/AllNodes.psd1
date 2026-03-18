@@ -109,9 +109,8 @@
             )
 
         },
-        @{
-            NodeName   = 'BB-DER-DC01' # COMMENTED FOR DERBY DC01
-            # NodeName   = 'localhost' 
+        @{ 
+            NodeName   = 'localhost'
             Role       = 'ChildDC'
             
             # --- Identity ---
@@ -154,8 +153,8 @@
             # --- Security ---
             PSDscAllowPlainTextPassword = $true
             PSDscAllowDomainUser        = $true
-    
-    
+        
+        
             # --- OU's ---
             OrganizationalUnits = @(
                 @{ Name = 'DER_Users';            Path = 'DC=derby,DC=barmbuzz,DC=corp' }
@@ -172,8 +171,6 @@
                 @{ Name = 'DER_NottinghamUsers';  Path = 'OU=DER_Nottingham,DC=derby,DC=barmbuzz,DC=corp' }
                 @{ Name = 'DER_NottinghamComputers';   Path = 'OU=DER_Nottingham,DC=derby,DC=barmbuzz,DC=corp' }
             )
-            
-    
         }
     )
-    }
+}
