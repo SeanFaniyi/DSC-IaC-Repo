@@ -1,0 +1,1222 @@
+**********************
+PowerShell transcript start
+Start time: 20260311120831
+Username: DERBY\Administrator
+RunAs User: DERBY\Administrator
+Configuration Name: 
+Machine: BB-DER-DC01 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -WorkingDirectory ~
+Process ID: 3864
+PSVersion: 7.5.4
+PSEdition: Core
+GitCommitId: 7.5.4
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[+] Transcript started: Evidence\\Transcripts\\20260311_120831_Run_BuildMain.txt
+[+] Admin privileges confirmed.
+
+[Phase 1] Prerequisites...
+[*] Invoke-BarmBuzz-OneShots: LCM then Network
+[*] LCM already configured (flag present).
+[*] Network already configured (flag present).
+[*] LCM already configured (skipping).
+[*] Network already configured (skipping).
+[+] Phase 1 complete.
+[+] Credentials loaded (hardcoded lab mode *** see warning in comments above ***).
+
+[Phase 2] Compile + Apply DSC...
+[*] Compiling -> DSC\\Outputs\\StudentBaseline
+[*] Compiling via Windows PowerShell 5.1 (GroupPolicyDsc requires it)...
+
+[+] Compilation complete.
+[*] Applying configuration (waits until complete)...
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'Users'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace ---
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'Users'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace --- 
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'Staff'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace ---
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'Staff'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace --- 
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'Admins'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace ---
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'Admins'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace --- 
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'Computers'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace ---
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'Computers'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace --- 
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'Workstations'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace ---
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'Workstations'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace --- 
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'Servers'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace ---
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'Servers'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace --- 
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'Groups'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace ---
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'Groups'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace --- 
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'BusinessRoles'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace ---
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'BusinessRoles'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace --- 
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'PermissionGroups'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace ---
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'PermissionGroups'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace --- 
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'AdminTiers'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace ---
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'AdminTiers'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace --- 
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'Nottingham'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace ---
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'Nottingham'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace --- 
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'NottinghamUsers'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace ---
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'NottinghamUsers'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace --- 
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'NottinghamComputers'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace ---
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'NottinghamComputers'. (ADOU0014) ---> System.Security.Authentication.AuthenticationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ServiceModel.Security.SecurityNegotiationException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.Security.Authentication.InvalidCredentialException: Either the target name is incorrect or the server has rejected the client credentials. ---> System.ComponentModel.Win32Exception: The logon attempt failed
+   --- End of inner exception stack trace ---
+   at System.Net.Security.NegoState.StartSendAuthResetSignal(LazyAsyncResult lazyResult, Byte[] message, Exception exception)
+   at System.Net.Security.NegoState.StartSendBlob(Byte[] message, LazyAsyncResult lazyResult)
+   at System.Net.Security.NegoState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.NegotiateStream.AuthenticateAsClient(NetworkCredential credential, String targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.WindowsStreamSecurityUpgradeProvider.WindowsStreamSecurityUpgradeInitiator.OnInitiateUpgrade(Stream stream, SecurityMessageProperty& remoteSecurity)
+   at System.ServiceModel.Channels.StreamSecurityUpgradeInitiatorBase.InitiateUpgrade(Stream stream)
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.InitiateUpgrade(StreamUpgradeInitiator upgradeInitiator, IConnection& connection, ClientFramingDecoder decoder, IDefaultCommunicationTimeouts defaultTimeouts, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at Microsoft.ActiveDirectory.WebServices.Proxy.Resource.Get(Message request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   --- End of inner exception stack trace ---
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.ThrowAuthenticationRelatedExceptionIfAny(CommunicationException exception)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.SearchAnObject(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.AdwsConnection.Search(ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADWebServiceStoreAccess.Microsoft.ActiveDirectory.Management.IADSyncOperations.Search(ADSessionHandle handle, ADSearchRequest request)
+   at Microsoft.ActiveDirectory.Management.ADObjectSearcher.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetRootDSE()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetConnectedStore()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace --- 
+CimException: The SendConfigurationApply function did not succeed.
+CimException: The SendConfigurationApply function did not succeed.
+[+] Apply complete.
+
+[Phase 3] Validation...
+[*] Pester validation will be added later.
+
+[+] BUILD SUCCESS
+[*] Next steps (commit outputs + evidence):
+    git add DSC\Outputs Evidence
+    git commit -m \ Build 20260311_120831\
+**********************
+PowerShell transcript end
+End time: 20260311120934
+**********************

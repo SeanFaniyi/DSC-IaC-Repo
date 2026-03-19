@@ -1,0 +1,6 @@
+
+FullName                                                    Length LastWriteTime
+--------                                                    ------ -------------
+C:\DSC-IaC-Repo\DSC\Outputs\StudentBaseline\BB-DER-DC01.mof  16040 3/11/2026 2:36:18 AM
+C:\DSC-IaC-Repo\DSC\Outputs\StudentBaseline\localhost.mof    45564 3/11/2026 2:36:18 AM
+

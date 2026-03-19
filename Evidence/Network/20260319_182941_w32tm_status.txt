@@ -1,0 +1,10 @@
+Leap Indicator: 3(not synchronized)
+Stratum: 0 (unspecified)
+Precision: -23 (119.209ns per tick)
+Root Delay: 0.0040587s
+Root Dispersion: 10.9274845s
+ReferenceId: 0x00000000 (unspecified)
+Last Successful Sync Time: 3/19/2026 6:25:27 PM
+Source: BB-BOL-DC01.barmbuzz.corp 
+Poll Interval: 6 (64s)
+

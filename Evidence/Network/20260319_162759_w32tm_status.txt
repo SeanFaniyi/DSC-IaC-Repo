@@ -1,0 +1,10 @@
+Leap Indicator: 0(no warning)
+Stratum: 2 (secondary reference - syncd by (S)NTP)
+Precision: -23 (119.209ns per tick)
+Root Delay: 0.0026791s
+Root Dispersion: 12.4701598s
+ReferenceId: 0xC0A80A0A (source IP:  192.168.10.10)
+Last Successful Sync Time: 3/19/2026 4:24:41 PM
+Source: BB-BOL-DC01.barmbuzz.corp 
+Poll Interval: 10 (1024s)
+

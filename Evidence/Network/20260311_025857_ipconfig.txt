@@ -1,0 +1,27 @@
+
+Windows IP Configuration
+
+   Host Name . . . . . . . . . . . . : WIN-O1E9ESF72PQ
+   Primary Dns Suffix  . . . . . . . : 
+   Node Type . . . . . . . . . . . . : Hybrid
+   IP Routing Enabled. . . . . . . . : No
+   WINS Proxy Enabled. . . . . . . . : No
+
+Ethernet adapter Ethernet:
+
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : Intel(R) 82574L Gigabit Network Connection
+   Physical Address. . . . . . . . . : 52-54-00-E6-13-93
+   DHCP Enabled. . . . . . . . . . . : Yes
+   Autoconfiguration Enabled . . . . : Yes
+   Link-local IPv6 Address . . . . . : fe80::9887:d47d:85e1:eb2a%4(Preferred) 
+   IPv4 Address. . . . . . . . . . . : 192.168.122.46(Preferred) 
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Lease Obtained. . . . . . . . . . : Sunday, February 2, 1890 3:14:47 AM
+   Lease Expires . . . . . . . . . . : Wednesday, March 11, 2026 3:43:04 AM
+   Default Gateway . . . . . . . . . : 192.168.122.1
+   DHCP Server . . . . . . . . . . . : 192.168.122.1
+   DHCPv6 IAID . . . . . . . . . . . : 106058752
+   DHCPv6 Client DUID. . . . . . . . : 00-01-00-01-31-43-3A-58-52-54-00-E6-13-93
+   DNS Servers . . . . . . . . . . . : 192.168.122.1
+   NetBIOS over Tcpip. . . . . . . . : Enabled

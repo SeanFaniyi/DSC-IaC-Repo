@@ -1,0 +1,58 @@
+**********************
+PowerShell transcript start
+Start time: 20260319165715
+Username: DERBY\Administrator
+RunAs User: DERBY\Administrator
+Configuration Name: 
+Machine: BB-DER-DC01 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -WorkingDirectory ~
+Process ID: 7428
+PSVersion: 7.5.4
+PSEdition: Core
+GitCommitId: 7.5.4
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[+] Transcript started: Evidence\\Transcripts\\20260319_165714_Run_BuildMain.txt
+[+] Admin privileges confirmed.
+
+[Phase 1] Prerequisites...
+[*] Invoke-BarmBuzz-OneShots: LCM then Network
+[*] LCM already configured (flag present).
+[*] Network already configured (flag present).
+[*] LCM already configured (skipping).
+[*] Network already configured (skipping).
+[+] Phase 1 complete.
+[+] Credentials loaded (hardcoded lab mode *** see warning in comments above ***).
+
+[Phase 2] Compile + Apply DSC...
+[*] Compiling -> DSC\\Outputs\\StudentBaseline
+[*] Compiling via Windows PowerShell 5.1 (GroupPolicyDsc requires it)...
+
+[+] Compilation complete.
+[*] Applying configuration (waits until complete)...
+InvalidData: The password does not meet the length, complexity, or history requirement of the domain.
+InvalidData: The password does not meet the length, complexity, or history requirement of the domain.
+InvalidData: The password does not meet the length, complexity, or history requirement of the domain.
+InvalidData: The password does not meet the length, complexity, or history requirement of the domain.
+InvalidOperation: The PowerShell DSC resource '[ADUser]DER_User_admin.derby' with SourceInfo 'C:\DSC-IaC-Repo\DSC\Configurations\StudentConfig.ps1::434::9::ADUser' threw one or more non-terminating errors while running the Set-TargetResource functionality. These errors are logged to the ETW channel called Microsoft-Windows-DSC/Operational. Refer to this channel for more details.
+InvalidOperation: The PowerShell DSC resource '[ADUser]DER_User_admin.derby' with SourceInfo 'C:\DSC-IaC-Repo\DSC\Configurations\StudentConfig.ps1::434::9::ADUser' threw one or more non-terminating errors while running the Set-TargetResource functionality. These errors are logged to the ETW channel called Microsoft-Windows-DSC/Operational. Refer to this channel for more details.
+CimException: The SendConfigurationApply function did not succeed.
+CimException: The SendConfigurationApply function did not succeed.
+[+] Apply complete.
+
+[Phase 3] Validation...
+[*] Pester validation will be added later.
+
+[+] BUILD SUCCESS
+[*] Next steps (commit outputs + evidence):
+    git add DSC\Outputs Evidence
+    git commit -m \ Build 20260319_165714\
+**********************
+PowerShell transcript end
+End time: 20260319165821
+**********************
