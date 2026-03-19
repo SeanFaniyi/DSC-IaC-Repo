@@ -411,17 +411,162 @@ Configuration StudentBaseline {
         )
     }
 
+    # =========================
+    # IDENTITY PLAIN
+    # =========================
+
+    # --- OU's ---
+
     foreach ($ou in $Node.OrganizationalUnits) {
-    ADOrganizationalUnit "OU_$($ou.Name)" {
-        Name                            = $ou.Name
-        Path                            = $ou.Path
-        Ensure                          = 'Present'
-        ProtectedFromAccidentalDeletion = $true
-        Credential                      = $ChildDomainCredential
-        DomainController                = $Node.DomainController
-        DependsOn                       = '[ADDomain]CreateChildDomain'
+        ADOrganizationalUnit "OU_$($ou.Name)" {
+            Name                            = $ou.Name
+            Path                            = $ou.Path
+            Ensure                          = 'Present'
+            ProtectedFromAccidentalDeletion = $true
+            Credential                      = $ChildDomainCredential
+            DomainController                = $Node.DomainController
+            DependsOn                       = '[ADDomain]CreateChildDomain'
         }
     }
 
+    # --- User Creation ---
+    foreach ($user in $Node.Users) {
+        ADUser "DER_User_$($user.UserName)" {
+            UserName   = $user.UserName
+            GivenName  = $user.GivenName
+            Surname    = $user.Surname
+            Ensure     = 'Present'
+            Password   = $UserCredential
+            DomainName = $Node.DomainName
+            Path       = "OU=$($user.OU),OU=DER_Users,DC=derby,DC=barmbuzz,DC=corp"
+            Credential = $ChildDomainCredential
+            DependsOn  = @(
+                '[ADOrganizationalUnit]OU_DER_Staff',
+                '[ADOrganizationalUnit]OU_DER_Admins',
+                '[ADDomain]CreateChildDomain',
+                '[ADDomainDefaultPasswordPolicy]RelaxDefaultPolicy'
+
+            )
+        }
+    }
+
+    # --- Business Role Groups 
+    foreach ($group in $Node.BusinessRoleGroups) {
+        ADGroup "DER_ROLE_$($group.Name)" {
+            GroupName        = $group.Name
+            GroupScope       = 'Global'
+            Category         = 'Security'
+            Path             = "OU=DER_BusinessRoles,OU=DER_Groups,DC=derby,DC=barmbuzz,DC=corp"
+            Ensure           = 'Present'
+            MembersToInclude = $group.Members
+            Credential       = $ChildDomainCredential
+            DependsOn        = @(
+                '[ADOrganizationalUnit]OU_DER_BusinessRoles',
+                '[ADUser]DER_User_jeff.driver',
+                '[ADUser]DER_User_sarah.operative',
+                '[ADUser]DER_User_admin.derby',
+                '[ADUser]DER_User_jim.manager'
+
+                # ADD NEW USERS HERE ^^^
+            )
+        }
+    }
+
+    # --- Permission Groups
+    foreach ($group in $Node.PermissionGroups) {
+        ADGroup "DER_PERM_GROUP_$($group.Name)" {
+            GroupName        = $group.Name
+            GroupScope       = 'DomainLocal'
+            Category         = 'Security'
+            Path             = "OU=DER_PermissionGroups,OU=DER_Groups,DC=derby,DC=barmbuzz,DC=corp"
+            Ensure           = 'Present'
+            MembersToInclude = $group.Members
+            Credential       = $ChildDomainCredential
+            DependsOn        = @(
+                '[ADOrganizationalUnit]OU_DER_PermissionGroups',
+                '[ADGroup]DER_ROLE_G_DER_Bus_Drivers',
+                '[ADGroup]DER_ROLE_G_DER_Operatives',
+                '[ADGroup]DER_ROLE_G_DER_Managers',
+                '[ADGroup]DER_ROLE_G_DER_Admins'
+            )
+
+            # ADD NEW GROUPS HERE ^^^
+        }
+    }
+
+
+    # Relax the global password policy scope. 
+    # FGPP will be implemented for admins.
+
+    # --- Password Policy ---
+
+    ADDomainDefaultPasswordPolicy RelaxDefaultPolicy {
+        DomainName                  = $Node.DomainName
+        ComplexityEnabled           = $false
+        MinPasswordLength           = 6
+        PasswordHistoryCount        = 0
+        MinPasswordAge              = 0
+        Credential                  = $ChildDomainCredential
+        DependsOn                   = '[ADDomain]CreateChildDomain'
+    }
+
+    ADFineGrainedPasswordPolicy StrongerAdminPasswordPolicy{
+        Name                        = 'DER_Stronger_Admin_Password_Policy'
+        Precedence                  = 1 # High priority over other FGP Policies
+        ComplexityEnabled           = $true # Ensure it has special character/numbers etc
+        MinPasswordLength           = 12 
+        PasswordHistoryCount        = 24
+        MinPasswordAge              = '00:01:00'    # Can change password after 1 day
+        MaxPasswordAge              = '90.00:00:00' # Expires in 90 days
+        LockoutThreshold            = 5    # Num of Attempts
+        LockoutDuration             = '00:30:00'
+        LockoutObservationWindow    = '00:30:00'
+        Subjects                    = @(
+            'G_DER_Admins'
+            )
+        Credential                  = $ChildDomainCredential
+        DependsOn                   = @(
+            '[ADDomain]CreateChildDomain',
+            '[ADGroup]DER_ROLE_G_DER_Admins',
+            '[ADUser]DER_User_admin.derby'
+
+
+            # ADD ADMINS HERE^
+        )
+    }
+    # GPO Idle Time - Derby
+    Script GPO_DER_IdleTimeout {
+        GetScript = {
+            $gpo = Get-GPO -Name 'DER_IdleTimedout' -ErrorAction SilentlyContinue
+            return @{ Result = if ($gpo) { 'Present' } else { 'Absent' } }
+        }
+        TestScript = {
+            $gpo = Get-GPO -Name 'DER_IdleTimedout' -ErrorAction SilentlyContinue
+            return ($null -ne $gpo)
+        }
+        SetScript = {
+            New-GPO -Name 'DER_IdleTimedout'
+
+            Set-GPRegistryValue -Name 'DER_IdleTimedout' `
+                -Key 'HKCU\Software\Policies\Microsoft\Windows\Control Panel\Desktop' `
+                -ValueName 'ScreenSaveTimeOut' `
+                -Type String -Value '300'
+
+            Set-GPRegistryValue -Name 'DER_IdleTimedout' `
+                -Key 'HKCU\Software\Policies\Microsoft\Windows\Control Panel\Desktop' `
+                -ValueName 'ScreenSaveActive' `
+                -Type String -Value '1'
+
+            New-GPLink -Name 'DER_IdleTimedout' `
+                -Target 'OU=DER_Staff,OU=DER_Users,DC=derby,DC=barmbuzz,DC=corp' `
+                -Domain 'derby.barmbuzz.corp' `
+                -LinkEnabled Yes
+                
+        }
+        DependsOn = '[ADDomain]CreateChildDomain'
+        PsDscRunAsCredential = $ChildDomainCredential
+    }
     }
 }
+
+    

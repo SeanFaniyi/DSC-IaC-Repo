@@ -110,6 +110,7 @@
 
         },
         @{ 
+             
             NodeName   = 'localhost'
             Role       = 'ChildDC'
             
@@ -153,8 +154,8 @@
             # --- Security ---
             PSDscAllowPlainTextPassword = $true
             PSDscAllowDomainUser        = $true
-        
-        
+       
+       
             # --- OU's ---
             OrganizationalUnits = @(
                 @{ Name = 'DER_Users';            Path = 'DC=derby,DC=barmbuzz,DC=corp' }
@@ -170,6 +171,74 @@
                 @{ Name = 'DER_Nottingham';       Path = 'DC=derby,DC=barmbuzz,DC=corp' }
                 @{ Name = 'DER_NottinghamUsers';  Path = 'OU=DER_Nottingham,DC=derby,DC=barmbuzz,DC=corp' }
                 @{ Name = 'DER_NottinghamComputers';   Path = 'OU=DER_Nottingham,DC=derby,DC=barmbuzz,DC=corp' }
+            )
+            
+                        # --- Users ---
+            Users = @(
+                # Staff users 
+                @{
+                    UserName  = 'jeff.driver'
+                    GivenName = 'Jeff'
+                    Surname   = 'Staff'
+                    OU        = 'DER_Staff'
+                },
+                @{
+                    UserName  = 'sarah.operative'
+                    GivenName = 'Sarah'
+                    Surname   = 'Operative'
+                    OU        = 'DER_Staff'
+                },
+                # Admin
+                @{
+                    UserName  = 'admin.derby'
+                    GivenName = 'Derby'
+                    Surname   = 'Admin'
+                    OU        = 'DER_Admins'
+                },
+                @{
+                    UserName  = 'jim.manager'
+                    GivenName = 'Jim'
+                    Surname   = 'Manager'
+                    OU        = 'DER_Staff'
+                }
+            )
+
+            BusinessRoleGroups = @(
+                @{
+                    Name    = 'G_DER_Bus_Drivers'
+                    Members = @('jeff.driver')
+                },
+                @{
+                    Name    = 'G_DER_Operatives'
+                    Members = @('sarah.operative')
+                },
+                @{
+                    Name    = 'G_DER_Managers'
+                    Members = @('admin.derby','jim.manager')
+                },
+                @{
+                    Name    = 'G_DER_Admins'
+                    Members = @('admin.derby')
+                }
+            )
+            
+            PermissionGroups = @(
+                @{
+                    Name    = 'PG_DER_Read_Routes'
+                    Members = @('G_DER_Bus_Drivers', 'G_DER_Operatives', 'G_DER_Managers')
+                },
+                @{
+                    Name    = 'PG_DER_Modify_Routes'
+                    Members = @('G_DER_Operatives', 'G_DER_Managers','G_DER_Admins')
+                },
+                @{
+                    Name    = 'PG_DER_Printer_Use'
+                    Members = @('G_DER_Bus_Drivers', 'G_DER_Operatives', 'G_DER_Managers')
+                },
+                @{
+                    Name    = 'PG_DER_Recipe_Access'
+                    Members = @('G_DER_Managers')
+                }
             )
         }
     )
