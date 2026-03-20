@@ -1,0 +1,5 @@
+
+FullName                                                  Length LastWriteTime
+--------                                                  ------ -------------
+C:\DSC-IaC-Repo\DSC\Outputs\StudentBaseline\localhost.mof  62108 3/19/2026 4:57:33 PM
+

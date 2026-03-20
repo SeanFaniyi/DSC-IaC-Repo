@@ -1,0 +1,70 @@
+**********************
+PowerShell transcript start
+Start time: 20260311121551
+Username: DERBY\Administrator
+RunAs User: DERBY\Administrator
+Configuration Name: 
+Machine: BB-DER-DC01 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -WorkingDirectory ~
+Process ID: 3864
+PSVersion: 7.5.4
+PSEdition: Core
+GitCommitId: 7.5.4
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[+] Transcript started: Evidence\\Transcripts\\20260311_121551_Run_BuildMain.txt
+[+] Admin privileges confirmed.
+
+[Phase 1] Prerequisites...
+[*] Invoke-BarmBuzz-OneShots: LCM then Network
+[*] LCM already configured (flag present).
+[*] Network already configured (flag present).
+[*] LCM already configured (skipping).
+[*] Network already configured (skipping).
+[+] Phase 1 complete.
+[+] Credentials loaded (hardcoded lab mode *** see warning in comments above ***).
+
+[Phase 2] Compile + Apply DSC...
+[*] Compiling -> DSC\\Outputs\\StudentBaseline
+[*] Compiling via Windows PowerShell 5.1 (GroupPolicyDsc requires it)...
+
+[+] Compilation complete.
+[*] Applying configuration (waits until complete)...
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'DER_Computers'. (ADOU0014) ---> System.ArgumentException: The supplied distinguishedName must belong to one of the following partition(s): 'CN=Configuration,DC=barmbuzz,DC=corp , CN=Schema,CN=Configuration,DC=barmbuzz,DC=corp , DC=ForestDnsZones,DC=barmbuzz,DC=corp , DC=derby,DC=barmbuzz,DC=corp'.
+   at Microsoft.ActiveDirectory.Management.ADForestPartitionInfo.ExtractAndValidatePartitionInfo(ADRootDSE rootDSE, String objectDN)
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace ---
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Test-TargetResource functionality with error message: System.InvalidOperationException: Error getting OU 'DER_Computers'. (ADOU0014) ---> System.ArgumentException: The supplied distinguishedName must belong to one of the following partition(s): 'CN=Configuration,DC=barmbuzz,DC=corp , CN=Schema,CN=Configuration,DC=barmbuzz,DC=corp , DC=ForestDnsZones,DC=barmbuzz,DC=corp , DC=derby,DC=barmbuzz,DC=corp'.
+   at Microsoft.ActiveDirectory.Management.ADForestPartitionInfo.ExtractAndValidatePartitionInfo(ADRootDSE rootDSE, String objectDN)
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.GetCmdletSessionInfo()
+   at Microsoft.ActiveDirectory.Management.Commands.ADGetCmdletBase`3.ADGetCmdletBaseBeginCSRoutine()
+   at Microsoft.ActiveDirectory.Management.CmdletSubroutinePipeline.Invoke()
+   at Microsoft.ActiveDirectory.Management.Commands.ADCmdletBase`1.BeginProcessing()
+   --- End of inner exception stack trace --- 
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Set-TargetResource functionality with error message: System.Exception: The Path 'OU=DER_Computers,DC=derby,DC=barmbuzz,DC=corp' was not found. (ADOU0010)
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Set-TargetResource functionality with error message: System.Exception: The Path 'OU=DER_Computers,DC=derby,DC=barmbuzz,DC=corp' was not found. (ADOU0010) 
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Set-TargetResource functionality with error message: System.Exception: The Path 'OU=DER_Computers,DC=derby,DC=barmbuzz,DC=corp' was not found. (ADOU0010)
+InvalidOperation: PowerShell DSC resource MSFT_ADOrganizationalUnit  failed to execute Set-TargetResource functionality with error message: System.Exception: The Path 'OU=DER_Computers,DC=derby,DC=barmbuzz,DC=corp' was not found. (ADOU0010) 
+CimException: The SendConfigurationApply function did not succeed.
+CimException: The SendConfigurationApply function did not succeed.
+[+] Apply complete.
+
+[Phase 3] Validation...
+[*] Pester validation will be added later.
+
+[+] BUILD SUCCESS
+[*] Next steps (commit outputs + evidence):
+    git add DSC\Outputs Evidence
+    git commit -m \ Build 20260311_121551\
+**********************
+PowerShell transcript end
+End time: 20260311121634
+**********************

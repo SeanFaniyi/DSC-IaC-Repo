@@ -1,0 +1,55 @@
+**********************
+PowerShell transcript start
+Start time: 20260311030504
+Username: WIN-O1E9ESF72PQ\Administrator
+RunAs User: WIN-O1E9ESF72PQ\Administrator
+Configuration Name: 
+Machine: WIN-O1E9ESF72PQ (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -WorkingDirectory ~
+Process ID: 916
+PSVersion: 7.5.4
+PSEdition: Core
+GitCommitId: 7.5.4
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[+] Transcript started: Evidence\\Transcripts\\20260311_030504_Run_BuildMain.txt
+[+] Admin privileges confirmed.
+
+[Phase 1] Prerequisites...
+[*] Invoke-BarmBuzz-OneShots: LCM then Network
+[*] LCM already configured (flag present).
+[*] Network already configured (flag present).
+[*] LCM already configured (skipping).
+[*] Network already configured (skipping).
+[+] Phase 1 complete.
+[+] Credentials loaded (hardcoded lab mode *** see warning in comments above ***).
+
+[Phase 2] Compile + Apply DSC...
+[*] Compiling -> DSC\\Outputs\\StudentBaseline
+[*] Compiling via Windows PowerShell 5.1 (GroupPolicyDsc requires it)...
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         3/11/2026   3:05 AM          15388 localhost.mof
+[+] Compilation complete.
+[*] Applying configuration (waits until complete)...
+NotEnabled: The WinRM client cannot process the request. If the authentication scheme is different from Kerberos, or if the client computer is not joined to a domain, then HTTPS transport must be used or the destination machine must be added to the TrustedHosts configuration setting. Use winrm.cmd to configure TrustedHosts. Note that computers in the TrustedHosts list might not be authenticated. You can get more information about that by running the following command: winrm help config.
+NotEnabled: The WinRM client cannot process the request. If the authentication scheme is different from Kerberos, or if the client computer is not joined to a domain, then HTTPS transport must be used or the destination machine must be added to the TrustedHosts configuration setting. Use winrm.cmd to configure TrustedHosts. Note that computers in the TrustedHosts list might not be authenticated. You can get more information about that by running the following command: winrm help config.
+[+] Apply complete.
+
+[Phase 3] Validation...
+[*] Pester validation will be added later.
+
+[+] BUILD SUCCESS
+[*] Next steps (commit outputs + evidence):
+    git add DSC\Outputs Evidence
+    git commit -m \ Build 20260311_030504\
+**********************
+PowerShell transcript end
+End time: 20260311030628
+**********************

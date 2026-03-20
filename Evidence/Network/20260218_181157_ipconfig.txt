@@ -1,0 +1,24 @@
+
+Windows IP Configuration
+
+   Host Name . . . . . . . . . . . . : BB-DC01
+   Primary Dns Suffix  . . . . . . . : 
+   Node Type . . . . . . . . . . . . : Hybrid
+   IP Routing Enabled. . . . . . . . : No
+   WINS Proxy Enabled. . . . . . . . : No
+
+Ethernet adapter Ethernet:
+
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : Intel(R) 82574L Gigabit Network Connection
+   Physical Address. . . . . . . . . : 52-54-00-9B-C6-93
+   DHCP Enabled. . . . . . . . . . . : No
+   Autoconfiguration Enabled . . . . : Yes
+   Link-local IPv6 Address . . . . . : fe80::529b:5052:5438:79fe%6(Preferred) 
+   IPv4 Address. . . . . . . . . . . : 192.168.122.10(Preferred) 
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Default Gateway . . . . . . . . . : 192.168.122.1
+   DHCPv6 IAID . . . . . . . . . . . : 106058752
+   DHCPv6 Client DUID. . . . . . . . : 00-01-00-01-31-1F-11-F5-52-54-00-9B-C6-93
+   DNS Servers . . . . . . . . . . . : 127.0.0.1
+   NetBIOS over Tcpip. . . . . . . . : Enabled

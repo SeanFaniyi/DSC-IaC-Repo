@@ -1,0 +1,56 @@
+**********************
+PowerShell transcript start
+Start time: 20260218173655
+Username: DC-01\Administrator
+RunAs User: DC-01\Administrator
+Configuration Name: 
+Machine: DC-01 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -WorkingDirectory ~
+Process ID: 4760
+PSVersion: 7.5.4
+PSEdition: Core
+GitCommitId: 7.5.4
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[+] Transcript started: Evidence\\Transcripts\\20260218_173654_Run_BuildMain.txt
+[+] Admin privileges confirmed.
+
+[Phase 1] Prerequisites...
+[*] Invoke-BarmBuzz-OneShots: LCM then Network
+[*] LCM already configured (flag present).
+[*] Network already configured (flag present).
+[*] LCM already configured (skipping).
+[*] Network already configured (skipping).
+[+] Phase 1 complete.
+
+[Phase 2] Compile + Apply DSC...
+[+] Found configuration: StudentBaseline
+[*] Compiling -> DSC\\Outputs\\StudentBaseline
+PSDesiredStateConfiguration\node: C:\Users\Administrator\DSC-IaC-Repo\DSC\Configurations\StudentConfig.ps1:9
+Line |
+   9 |      Node $AllNodes.NodeName {
+     |      ~~~~
+     | The term 'DhcpClient' is not recognized as a name of a cmdlet, function, script file, or executable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+PSDesiredStateConfiguration\node: C:\Users\Administrator\DSC-IaC-Repo\DSC\Configurations\StudentConfig.ps1:9
+Line |
+   9 |      Node $AllNodes.NodeName {
+     |      ~~~~
+     | The term 'DhcpClient' is not recognized as a name of a cmdlet, function, script file, or executable
+     | program. Check the spelling of the name, or if a path was included, verify that the path is correct
+     | and try again.
+
+PS>TerminatingError(): "Errors occurred while processing configuration 'StudentBaseline'."
+PS>TerminatingError(): "Errors occurred while processing configuration 'StudentBaseline'."
+>> TerminatingError(): "Errors occurred while processing configuration 'StudentBaseline'."
+
+[-] BUILD FAILED
+Message: Errors occurred while processing configuration 'StudentBaseline'.
+**********************
+PowerShell transcript end
+End time: 20260218173655
+**********************

@@ -1,0 +1,380 @@
+
+Directory Server Diagnosis
+
+Performing initial setup:
+   Trying to find home server...
+   * Verifying that the local machine BB-DER-DC01, is a Directory Server. 
+   Home Server = BB-DER-DC01
+   * Connecting to directory service on server BB-DER-DC01.
+   * Identified AD Forest. 
+   Collecting AD specific global data 
+   * Collecting site info.
+   Calling ldap_search_init_page(hld,CN=Sites,CN=Configuration,DC=barmbuzz,DC=corp,LDAP_SCOPE_SUBTREE,(objectCategory=ntDSSiteSettings),.......
+   The previous call succeeded 
+   Iterating through the sites 
+   Looking at base site object: CN=NTDS Site Settings,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=barmbuzz,DC=corp
+   Getting ISTG and options for the site
+   * Identifying all servers.
+   Calling ldap_search_init_page(hld,CN=Sites,CN=Configuration,DC=barmbuzz,DC=corp,LDAP_SCOPE_SUBTREE,(objectClass=ntDSDsa),.......
+   The previous call succeeded....
+   The previous call succeeded
+   Iterating through the list of servers 
+   Getting information for the server CN=NTDS Settings,CN=BB-BOL-DC01,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=barmbuzz,DC=corp 
+   objectGuid obtained
+   InvocationID obtained
+   dnsHostname obtained
+   site info obtained
+   All the info for the server collected
+   Getting information for the server CN=NTDS Settings,CN=BB-DER-DC01,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=barmbuzz,DC=corp 
+   objectGuid obtained
+   InvocationID obtained
+   dnsHostname obtained
+   site info obtained
+   All the info for the server collected
+   * Identifying all NC cross-refs.
+   * Found 2 DC(s). Testing 1 of them.
+   Done gathering initial info.
+
+Doing initial required tests
+   
+   Testing server: Default-First-Site-Name\BB-DER-DC01
+      Starting test: Connectivity
+         * Active Directory LDAP Services Check
+         Determining IP4 connectivity 
+         * Active Directory RPC Services Check
+         ......................... BB-DER-DC01 passed test Connectivity
+
+Doing primary tests
+   
+   Testing server: Default-First-Site-Name\BB-DER-DC01
+      Starting test: Advertising
+         The DC BB-DER-DC01 is advertising itself as a DC and having a DS.
+         The DC BB-DER-DC01 is advertising as an LDAP server
+         The DC BB-DER-DC01 is advertising as having a writeable directory
+         The DC BB-DER-DC01 is advertising as a Key Distribution Center
+         The DC BB-DER-DC01 is advertising as a time server
+         The DS BB-DER-DC01 is advertising as a GC.
+         ......................... BB-DER-DC01 passed test Advertising
+      Test omitted by user request: CheckSecurityError
+      Test omitted by user request: CutoffServers
+      Starting test: FrsEvent
+         * The File Replication Service Event log test 
+         Skip the test because the server is running DFSR.
+         ......................... BB-DER-DC01 passed test FrsEvent
+      Starting test: DFSREvent
+         The DFS Replication Event Log. 
+         There are warning or error events within the last 24 hours after the
+         SYSVOL has been shared.  Failing SYSVOL replication problems may cause
+         Group Policy problems. 
+         An error event occurred.  EventID: 0xC00004B2
+            Time Generated: 03/18/2026   21:45:35
+            Event String:
+            The DFS Replication service failed to contact domain controller  to access configuration information. Replication is stopped. The service will try again during the next configuration polling cycle, which will occur in 60 minutes. This event can be caused by TCP/IP connectivity, firewall, Active Directory Domain Services, or DNS issues. 
+             
+            Additional Information: 
+            Error: 160 (One or more arguments are not correct.)
+         An error event occurred.  EventID: 0xC00004B2
+            Time Generated: 03/19/2026   16:31:40
+            Event String:
+            The DFS Replication service failed to contact domain controller  to access configuration information. Replication is stopped. The service will try again during the next configuration polling cycle, which will occur in 60 minutes. This event can be caused by TCP/IP connectivity, firewall, Active Directory Domain Services, or DNS issues. 
+             
+            Additional Information: 
+            Error: 160 (One or more arguments are not correct.)
+         An error event occurred.  EventID: 0xC00004B2
+            Time Generated: 03/19/2026   16:51:23
+            Event String:
+            The DFS Replication service failed to contact domain controller  to access configuration information. Replication is stopped. The service will try again during the next configuration polling cycle, which will occur in 60 minutes. This event can be caused by TCP/IP connectivity, firewall, Active Directory Domain Services, or DNS issues. 
+             
+            Additional Information: 
+            Error: 160 (One or more arguments are not correct.)
+         ......................... BB-DER-DC01 failed test DFSREvent
+      Starting test: SysVolCheck
+         * The File Replication Service SYSVOL ready test 
+         File Replication Service's SYSVOL is ready 
+         ......................... BB-DER-DC01 passed test SysVolCheck
+      Starting test: KccEvent
+         * The KCC Event log test
+         Found no KCC errors in "Directory Service" Event log in the last 15 minutes.
+         ......................... BB-DER-DC01 passed test KccEvent
+      Starting test: KnowsOfRoleHolders
+         Role Schema Owner = CN=NTDS Settings,CN=BB-BOL-DC01,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=barmbuzz,DC=corp
+         Role Domain Owner = CN=NTDS Settings,CN=BB-BOL-DC01,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=barmbuzz,DC=corp
+         Role PDC Owner = CN=NTDS Settings,CN=BB-DER-DC01,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=barmbuzz,DC=corp
+         Role Rid Owner = CN=NTDS Settings,CN=BB-DER-DC01,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=barmbuzz,DC=corp
+         Role Infrastructure Update Owner = CN=NTDS Settings,CN=BB-DER-DC01,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=barmbuzz,DC=corp
+         ......................... BB-DER-DC01 passed test KnowsOfRoleHolders
+      Starting test: MachineAccount
+         Checking machine account for DC BB-DER-DC01 on DC BB-DER-DC01.
+         * SPN found :LDAP/BB-DER-DC01.derby.barmbuzz.corp/derby.barmbuzz.corp
+         * SPN found :LDAP/BB-DER-DC01.derby.barmbuzz.corp
+         * SPN found :LDAP/BB-DER-DC01
+         * SPN found :LDAP/BB-DER-DC01.derby.barmbuzz.corp/DERBY
+         * SPN found :LDAP/c8208cba-ff05-4762-b067-d6ac42f17c17._msdcs.barmbuzz.corp
+         * SPN found :E3514235-4B06-11D1-AB04-00C04FC2DCD2/c8208cba-ff05-4762-b067-d6ac42f17c17/derby.barmbuzz.corp
+         * SPN found :HOST/BB-DER-DC01.derby.barmbuzz.corp/derby.barmbuzz.corp
+         * SPN found :HOST/BB-DER-DC01.derby.barmbuzz.corp
+         * SPN found :HOST/BB-DER-DC01
+         * SPN found :HOST/BB-DER-DC01.derby.barmbuzz.corp/DERBY
+         * SPN found :GC/BB-DER-DC01.derby.barmbuzz.corp/barmbuzz.corp
+         ......................... BB-DER-DC01 passed test MachineAccount
+      Starting test: NCSecDesc
+         * Security Permissions check for all NC's on DC BB-DER-DC01.
+         * Security Permissions Check for
+           DC=derby,DC=barmbuzz,DC=corp
+            (Domain,Version 3)
+         * Security Permissions Check for
+           DC=ForestDnsZones,DC=barmbuzz,DC=corp
+            (NDNC,Version 3)
+         * Security Permissions Check for
+           CN=Schema,CN=Configuration,DC=barmbuzz,DC=corp
+            (Schema,Version 3)
+         * Security Permissions Check for
+           CN=Configuration,DC=barmbuzz,DC=corp
+            (Configuration,Version 3)
+         * Security Permissions Check for
+           DC=barmbuzz,DC=corp
+            (Domain,Version 3)
+         ......................... BB-DER-DC01 passed test NCSecDesc
+      Starting test: NetLogons
+         * Network Logons Privileges Check
+         Verified share \\BB-DER-DC01\netlogon
+         Verified share \\BB-DER-DC01\sysvol
+         ......................... BB-DER-DC01 passed test NetLogons
+      Starting test: ObjectsReplicated
+         BB-DER-DC01 is in domain DC=derby,DC=barmbuzz,DC=corp
+         Checking for CN=BB-DER-DC01,OU=Domain Controllers,DC=derby,DC=barmbuzz,DC=corp in domain DC=derby,DC=barmbuzz,DC=corp on 1 servers
+            Object is up-to-date on all servers.
+         Checking for CN=NTDS Settings,CN=BB-DER-DC01,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=barmbuzz,DC=corp in domain CN=Configuration,DC=barmbuzz,DC=corp on 1 servers
+            Object is up-to-date on all servers.
+         ......................... BB-DER-DC01 passed test ObjectsReplicated
+      Test omitted by user request: OutboundSecureChannels
+      Starting test: Replications
+         * Replications Check
+         * Replication Latency Check
+         ......................... BB-DER-DC01 passed test Replications
+      Starting test: RidManager
+         * Available RID Pool for the Domain is 1600 to 1073741823
+         * BB-DER-DC01.derby.barmbuzz.corp is the RID Master
+         * DsBind with RID Master was successful
+         * rIDAllocationPool is 1100 to 1599
+         * rIDPreviousAllocationPool is 1100 to 1599
+         * rIDNextRID: 1115
+         ......................... BB-DER-DC01 passed test RidManager
+      Starting test: Services
+         * Checking Service: EventSystem
+         * Checking Service: RpcSs
+         * Checking Service: NTDS
+         * Checking Service: DnsCache
+         * Checking Service: DFSR
+         * Checking Service: IsmServ
+         * Checking Service: kdc
+         * Checking Service: SamSs
+         * Checking Service: LanmanServer
+         * Checking Service: LanmanWorkstation
+         * Checking Service: w32time
+         * Checking Service: NETLOGON
+         ......................... BB-DER-DC01 passed test Services
+      Starting test: SystemLog
+         * The System Event log test
+         A warning event occurred.  EventID: 0x00002720
+            Time Generated: 03/19/2026   20:04:25
+            Event String:
+            The machine-default permission settings do not grant Local Activation permission for the COM Server application with CLSID 
+            {F87B28F1-DA9A-4F35-8EC0-800EFCF26B83}
+             and APPID 
+            {0868DC9B-D9A2-4F64-9362-133CEA201299}
+             to the user NT AUTHORITY\NETWORK SERVICE SID (S-1-5-20) from address LocalHost (Using LRPC) running in the application container Unavailable SID (Unavailable). This security permission can be modified using the Component Services administrative tool.
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:04:56
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:04:56
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:04:56
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:04:57
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x0000008E
+            Time Generated: 03/19/2026   20:05:01
+            Event String:
+            The time service has stopped advertising as a time source because the local clock is not synchronized.
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:05:10
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:05:10
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:05:10
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:05:10
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:06:58
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:06:59
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:06:59
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:06:59
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:21:39
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:21:39
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:21:40
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:21:40
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:21:50
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:21:50
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:21:50
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:21:50
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:36:40
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:36:41
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:36:41
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         A warning event occurred.  EventID: 0x00009016
+            Time Generated: 03/19/2026   20:36:41
+            Event String:
+            No suitable default server credential exists on this system. This will prevent server applications that expect to make use of the system default credentials from accepting SSL connections. An example of such an application is the directory server. Applications that manage their own credentials, such as the internet information server, are not affected by this.
+             The SSPI client process is lsass (PID: 792).
+         Found no errors in "System" Event log in the last 60 minutes.
+         ......................... BB-DER-DC01 passed test SystemLog
+      Test omitted by user request: Topology
+      Test omitted by user request: VerifyEnterpriseReferences
+      Starting test: VerifyReferences
+         The system object reference (serverReference)
+         CN=BB-DER-DC01,OU=Domain Controllers,DC=derby,DC=barmbuzz,DC=corp and
+         backlink on
+         CN=BB-DER-DC01,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=barmbuzz,DC=corp
+         are correct. 
+         The system object reference (serverReferenceBL)
+         CN=BB-DER-DC01,CN=Topology,CN=Domain System Volume,CN=DFSR-GlobalSettings,CN=System,DC=derby,DC=barmbuzz,DC=corp
+         and backlink on
+         CN=NTDS Settings,CN=BB-DER-DC01,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=barmbuzz,DC=corp
+         are correct. 
+         The system object reference (msDFSR-ComputerReferenceBL)
+         CN=BB-DER-DC01,CN=Topology,CN=Domain System Volume,CN=DFSR-GlobalSettings,CN=System,DC=derby,DC=barmbuzz,DC=corp
+         and backlink on
+         CN=BB-DER-DC01,OU=Domain Controllers,DC=derby,DC=barmbuzz,DC=corp are
+         correct. 
+         ......................... BB-DER-DC01 passed test VerifyReferences
+      Test omitted by user request: VerifyReplicas
+   
+      Test omitted by user request: DNS
+      Test omitted by user request: DNS
+   
+   Running partition tests on : derby
+      Starting test: CheckSDRefDom
+         ......................... derby passed test CheckSDRefDom
+      Starting test: CrossRefValidation
+         ......................... derby passed test CrossRefValidation
+   
+   Running partition tests on : ForestDnsZones
+      Starting test: CheckSDRefDom
+         ......................... ForestDnsZones passed test CheckSDRefDom
+      Starting test: CrossRefValidation
+         ......................... ForestDnsZones passed test
+         CrossRefValidation
+   
+   Running partition tests on : Schema
+      Starting test: CheckSDRefDom
+         ......................... Schema passed test CheckSDRefDom
+      Starting test: CrossRefValidation
+         ......................... Schema passed test CrossRefValidation
+   
+   Running partition tests on : Configuration
+      Starting test: CheckSDRefDom
+         ......................... Configuration passed test CheckSDRefDom
+      Starting test: CrossRefValidation
+         ......................... Configuration passed test CrossRefValidation
+   
+   Running enterprise tests on : barmbuzz.corp
+      Test omitted by user request: DNS
+      Test omitted by user request: DNS
+      Starting test: LocatorCheck
+         GC Name: \\BB-DER-DC01.derby.barmbuzz.corp
+         Locator Flags: 0xe007f1fd
+         PDC Name: \\BB-DER-DC01.derby.barmbuzz.corp
+         Locator Flags: 0xe007f1fd
+         Time Server Name: \\BB-DER-DC01.derby.barmbuzz.corp
+         Locator Flags: 0xe007f1fd
+         Preferred Time Server Name: \\BB-DER-DC01.derby.barmbuzz.corp
+         Locator Flags: 0xe007f1fd
+         KDC Name: \\BB-DER-DC01.derby.barmbuzz.corp
+         Locator Flags: 0xe007f1fd
+         ......................... barmbuzz.corp passed test LocatorCheck
+      Starting test: Intersite
+         Skipping site Default-First-Site-Name, this site is outside the scope
+         provided by the command line arguments provided. 
+         ......................... barmbuzz.corp passed test Intersite

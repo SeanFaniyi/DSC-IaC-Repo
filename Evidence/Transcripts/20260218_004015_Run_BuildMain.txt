@@ -1,0 +1,88 @@
+**********************
+PowerShell transcript start
+Start time: 20260218004015
+Username: WIN-7A4ND87215S\Administrator
+RunAs User: WIN-7A4ND87215S\Administrator
+Configuration Name: 
+Machine: WIN-7A4ND87215S (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -WorkingDirectory ~
+Process ID: 3124
+PSVersion: 7.5.4
+PSEdition: Core
+GitCommitId: 7.5.4
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[+] Transcript started: Evidence\\Transcripts\\20260218_004015_Run_BuildMain.txt
+[+] Admin privileges confirmed.
+
+[Phase 1] Prerequisites...
+[*] Invoke-BarmBuzz-OneShots: LCM then Network
+--- [STAFF-ONLY] Configuring Persistent LCM Settings ---
+[*] Applying persistent automation settings...
+[+] LCM configured. Server is now reboot-ready.
+[*] Ensuring DSC modules are installed/pinned (PSResourceGet) ...
+    -> GroupPolicyDsc@1.0.3 already present (skipping).
+    -> ActiveDirectoryDsc@6.6.0 already present (skipping).
+    -> Pester@5.7.1 already present (skipping).
+    -> PSDesiredStateConfiguration@2.0.7 already present (skipping).
+[+] DSC module baseline ensured at C:\\Program Files\\WindowsPowerShell\\Modules.
+--- BarmBuzz Network, PSRemoting & RSAT Prep ---
+[*] Checking Network Connection Profiles (all connected NICs)...
+    'Network' already Private.
+
+[*] Configuring Windows Remote Management (WinRM)...
+WARNING: PowerShell remoting has been enabled only for PowerShell 6+ configurations and does not affect Windows PowerShell remoting configurations. Run this cmdlet in Windows PowerShell to affect all PowerShell remoting configurations.
+WinRM is already set up to receive requests on this computer.
+WinRM is already set up for remote management on this computer.
+
+[*] Verifying Connectivity...
+    [+] WinRM is responding! (Protocol Version: OS: 0.0.0 SP: 0.0 Stack: 3.0)
+    [+] Ready for Orchestration.
+
+[*] Ensuring RSAT tools (AD + GPO) are installed...
+WARNING: RSAT install (server) may have failed. StdErr: Try {
+    Import-Module ServerManager -ErrorAction Stop
+    Install-WindowsFeature RSAT-AD-PowerShell -ErrorAction Stop | Out-Null
+    Install-WindowsFeature GPMC -ErrorAction Stop | Out-Null
+    Write-Output ''RSAT features installed (server).''
+} Catch { Write-Error $_ } : The term 'server' is not recognized as the name of a cmdlet, function, script file, or 
+operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try 
+again.
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException
+[+] Network/Remoting/RSAT baseline complete.
+[*] LCM already configured (skipping).
+[*] Network already configured (skipping).
+[+] Phase 1 complete.
+
+[Phase 2] Compile + Apply DSC...
+[+] Found configuration: StudentBaseline
+[*] Compiling -> DSC\\Outputs\\StudentBaseline
+PSDesiredStateConfiguration\node: C:\Users\Administrator\DSC-IaC-Repo\DSC\Configurations\StudentConfig.ps1:15
+Line |
+  15 |      Node $AllNodes.NodeName {
+     |      ~~~~
+     | The term 'C' is not recognized as a name of a cmdlet, function, script file, or executable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+PSDesiredStateConfiguration\node: C:\Users\Administrator\DSC-IaC-Repo\DSC\Configurations\StudentConfig.ps1:15
+Line |
+  15 |      Node $AllNodes.NodeName {
+     |      ~~~~
+     | The term 'C' is not recognized as a name of a cmdlet, function, script file, or executable program.
+     | Check the spelling of the name, or if a path was included, verify that the path is correct and try
+     | again.
+
+PS>TerminatingError(): "Errors occurred while processing configuration 'StudentBaseline'."
+PS>TerminatingError(): "Errors occurred while processing configuration 'StudentBaseline'."
+>> TerminatingError(): "Errors occurred while processing configuration 'StudentBaseline'."
+
+[-] BUILD FAILED
+Message: Errors occurred while processing configuration 'StudentBaseline'.
+**********************
+PowerShell transcript end
+End time: 20260218004106
+**********************

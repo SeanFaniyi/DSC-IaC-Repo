@@ -162,28 +162,154 @@ try {
 
     Write-Host "[+] Phase 1 complete." -ForegroundColor Green
 
+    # ═══════════════════════════════════════════════════════════════════════════
+    # CREDENTIALS — HARDCODED FOR LAB TEACHING ONLY
+    # ═══════════════════════════════════════════════════════════════════════════
+    #
+    # ╔══════════════════════════════════════════════════════════════════════╗
+    # ║  WARNING: THIS IS PROFESSIONALLY IRRESPONSIBLE                     ║
+    # ║                                                                    ║
+    # ║  We are hardcoding passwords in a script that is committed to Git. ║
+    # ║  In any real environment, this would be a sackable offence.        ║
+    # ║                                                                    ║
+    # ║  We do it here ONLY because:                                       ║
+    # ║    1. This is a disposable teaching lab (VMs rebuilt every week)    ║
+    # ║    2. The passwords are already published in the project README    ║
+    # ║    3. Removing the interactive prompts lets students focus on DSC   ║
+    # ║       rather than typing passwords three times per build cycle     ║
+    # ║    4. The repo is private and never leaves the lab network         ║
+    # ║                                                                    ║
+    # ║  IN PRODUCTION YOU WOULD:                                          ║
+    # ║    • Prompt at runtime (Read-Host -AsSecureString)                 ║
+    # ║    • Pull from Azure KeyVault / AWS Secrets Manager / HashiCorp    ║
+    # ║    • Use certificate-encrypted MOF files (CertificateFile in data) ║
+    # ║    • NEVER store credentials in source control. Ever.              ║
+    # ║                                                                    ║
+    # ║  If you put passwords in a repo in industry, you WILL be fired.    ║
+    # ║  GitHub scans for leaked credentials automatically.                ║
+    # ║  The Uber engineer incident (2021) cost $100K+ and a career.       ║
+    # ╚══════════════════════════════════════════════════════════════════════╝
+    #
+    # THREE CREDENTIALS:
+    # 1. DomainAdminCredential — local Administrator → becomes Domain Admin after promotion
+    # 2. DsrmCredential — Directory Services Restore Mode (DC emergency recovery)
+    # 3. UserCredential — default password for end-user accounts (ADUser resources)
+    #
+    # Lab passwords (from Documentation\README.md):
+    #   Administrator = superw1n_user
+    #   End-users     = notlob2k26
+    #
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    # --- LAB-ONLY HARDCODED CREDENTIALS (current) ---
+    $AdminPlainText = 'superw1n_user'
+    $UserPlainText  = 'notlob2k26'
+
+    $DomainAdminCredential = New-Object System.Management.Automation.PSCredential(
+        'Administrator',
+        (ConvertTo-SecureString $AdminPlainText -AsPlainText -Force)
+    )
+    $DsrmCredential = New-Object System.Management.Automation.PSCredential(
+        'Administrator',
+        (ConvertTo-SecureString $AdminPlainText -AsPlainText -Force)
+    )
+    $UserCredential = New-Object System.Management.Automation.PSCredential(
+        'LabUser',
+        (ConvertTo-SecureString $UserPlainText -AsPlainText -Force)
+    )
+    Write-Host "[+] Credentials loaded (hardcoded lab mode *** see warning in comments above ***)." -ForegroundColor Yellow
+
+    # --- PRODUCTION ALTERNATIVE (uncomment to replace hardcoded block above) ---
+    # Write-Host "`n[Credential] Domain Administrator Password Required..." -ForegroundColor Yellow
+    # $AdminPassword = Read-Host -Prompt "Enter local Administrator password" -AsSecureString
+    # $DomainAdminCredential = New-Object System.Management.Automation.PSCredential(
+    #     "Administrator", $AdminPassword
+    # )
+    # Write-Host "[+] Domain Admin credential captured (not logged)." -ForegroundColor Green
+    #
+    # Write-Host "`n[Credential] DSRM Password Required..." -ForegroundColor Yellow
+    # $DsrmPassword = Read-Host -Prompt "Enter DSRM password" -AsSecureString
+    # $DsrmCredential = New-Object System.Management.Automation.PSCredential(
+    #     "Administrator", $DsrmPassword
+    # )
+    # Write-Host "[+] DSRM credential captured (not logged)." -ForegroundColor Green
+    #
+    # Write-Host "`n[Credential] End-User Default Password Required..." -ForegroundColor Yellow
+    # $UserPassword = Read-Host -Prompt "Enter end-user default password" -AsSecureString
+    # $UserCredential = New-Object System.Management.Automation.PSCredential(
+    #     "LabUser", $UserPassword
+    # )
+    # Write-Host "[+] User credential captured (not logged)." -ForegroundColor Green
+
     Write-Host "`n[Phase 2] Compile + Apply DSC..." -ForegroundColor Yellow
 
     # SEPARATION OF CONCERNS
     # - Data (AllNodes.psd1) describes the environment.
     # - Configuration (StudentConfig.ps1) implements resources using that data.
-    # Dot-sourcing the configuration script makes the Configuration definition available.
+    # - Credentials flow through the orchestrator, not config files.
 
     $ConfigData = Import-PowerShellDataFile -Path $StudentDataFile
     Assert-AllNodesData -ConfigData $ConfigData
-    . $StudentConfigScript
-    if (-not (Get-Command $ConfigName -ErrorAction SilentlyContinue)) {
-        throw "StudentConfig.ps1 must define a Configuration named '$ConfigName'."
-    }
-    Write-Host "[+] Found configuration: $ConfigName" -ForegroundColor Green
 
     $CompileOut = Join-Path $OutputsRoot $ConfigName
     New-FolderIfMissing -Path $CompileOut
     Write-Host "[*] Compiling -> DSC\\Outputs\\$ConfigName" -ForegroundColor Gray
-    & $ConfigName -ConfigurationData $ConfigData -OutputPath $CompileOut
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # WHY PS5.1 FOR COMPILATION?
+    # ═══════════════════════════════════════════════════════════════════════════
+    #
+    # GroupPolicyDsc uses CLASS-BASED DSC resources (DSCClassResources/).
+    # Class-based resources only load in Windows PowerShell 5.1 — PS7 cannot
+    # parse them and throws "The term 'GroupPolicy' is not recognized".
+    #
+    # So: this orchestrator runs in PS7 (for modern language features, better
+    # error handling, transcript support), but shells out to powershell.exe
+    # (PS5.1) purely for the MOF compilation step.
+    #
+    # Start-DscConfiguration (the APPLY step) works fine from PS7 because it
+    # delegates to the WMI/CIM DSC engine which is always PS5.1 under the hood.
+    #
+    # The temp script is written to disk, executed by PS5.1, then deleted.
+    # Passwords appear in the temp file briefly — acceptable for a lab VM,
+    # unacceptable in production (use certificate-encrypted MOFs instead).
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    $TempCompileScript = Join-Path $env:TEMP "BarmBuzz_Compile_$RunStamp.ps1"
+    @"
+# Auto-generated compile script — executed by Windows PowerShell 5.1
+# This file is deleted immediately after compilation.
+`$env:PSModulePath = "`$PSHOME\Modules;C:\Program Files\WindowsPowerShell\Modules"
+
+. '$StudentConfigScript'
+`$ConfigData = Import-PowerShellDataFile -Path '$StudentDataFile'
+
+`$adminCred = New-Object PSCredential('Administrator',
+    (ConvertTo-SecureString '$AdminPlainText' -AsPlainText -Force))
+`$dsrmCred  = New-Object PSCredential('Administrator',
+    (ConvertTo-SecureString '$AdminPlainText' -AsPlainText -Force))
+`$userCred  = New-Object PSCredential('LabUser',
+    (ConvertTo-SecureString '$UserPlainText' -AsPlainText -Force))
+
+StudentBaseline ``
+    -ConfigurationData `$ConfigData ``
+    -DomainAdminCredential `$adminCred ``
+    -DsrmCredential `$dsrmCred ``
+    -UserCredential `$userCred ``
+    -OutputPath '$CompileOut'
+"@ | Set-Content -Path $TempCompileScript -Encoding UTF8
+
+    Write-Host "[*] Compiling via Windows PowerShell 5.1 (GroupPolicyDsc requires it)..." -ForegroundColor Gray
+    powershell.exe -NoProfile -ExecutionPolicy Bypass -File $TempCompileScript
+
+    if ($LASTEXITCODE -ne 0) {
+        Remove-Item $TempCompileScript -Force -ErrorAction SilentlyContinue
+        throw "MOF compilation failed in PS5.1 (exit code $LASTEXITCODE). Check StudentConfig.ps1 and AllNodes.psd1."
+    }
+    Remove-Item $TempCompileScript -Force -ErrorAction SilentlyContinue
     Write-Host "[+] Compilation complete." -ForegroundColor Green
 
-    # RESULT: MOF files in DSC\Outputs\StudentBaseline (e.g., localhost.mof)
+    # RESULT: MOF files in DSC\Outputs\StudentBaseline (e.g., localhost.mof, BB-WIN11-01.mof)
     # Inspect MOFs to understand the resources and properties generated.
 
     Get-ChildItem -Path $CompileOut -Recurse |

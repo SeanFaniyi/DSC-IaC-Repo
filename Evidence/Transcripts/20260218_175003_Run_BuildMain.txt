@@ -1,0 +1,272 @@
+**********************
+PowerShell transcript start
+Start time: 20260218175003
+Username: DC-01\Administrator
+RunAs User: DC-01\Administrator
+Configuration Name: 
+Machine: DC-01 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -WorkingDirectory ~
+Process ID: 4760
+PSVersion: 7.5.4
+PSEdition: Core
+GitCommitId: 7.5.4
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[+] Transcript started: Evidence\\Transcripts\\20260218_175003_Run_BuildMain.txt
+[+] Admin privileges confirmed.
+
+[Phase 1] Prerequisites...
+[*] Invoke-BarmBuzz-OneShots: LCM then Network
+[*] LCM already configured (flag present).
+[*] Network already configured (flag present).
+[*] LCM already configured (skipping).
+[*] Network already configured (skipping).
+[+] Phase 1 complete.
+
+[Phase 2] Compile + Apply DSC...
+[+] Found configuration: StudentBaseline
+[*] Compiling -> DSC\\Outputs\\StudentBaseline
+Write-Error: A second CIM class definition for 'DSC_DefaultGatewayAddress' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DefaultGatewayAddress\DSC_DefaultGatewayAddress.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DefaultGatewayAddress\DSC_DefaultGatewayAddress.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_DefaultGatewayAddress' was found while processing the schema file
+'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DefaultGatewayAddress\DSC_DefaultGatewayA
+ddress.schema.mof'. This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DefaultGatewayAddres
+s\DSC_DefaultGatewayAddress.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_DnsClientGlobalSetting' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DnsClientGlobalSetting\DSC_DnsClientGlobalSetting.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DnsClientGlobalSetting\DSC_DnsClientGlobalSetting.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_DnsClientGlobalSetting' was found while processing the schema file
+'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DnsClientGlobalSetting\DSC_DnsClientGloba
+lSetting.schema.mof'. This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DnsClientGlobalSetti
+ng\DSC_DnsClientGlobalSetting.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_DnsClientNrptGlobal' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DnsClientNrptGlobal\DSC_DnsClientNrptGlobal.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DnsClientNrptGlobal\DSC_DnsClientNrptGlobal.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_DnsClientNrptGlobal' was found while processing the schema file
+'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DnsClientNrptGlobal\DSC_DnsClientNrptGlob
+al.schema.mof'. This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DnsClientNrptGlobal\
+DSC_DnsClientNrptGlobal.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_DnsClientNrptRule' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DnsClientNrptRule\DSC_DnsClientNrptRule.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DnsClientNrptRule\DSC_DnsClientNrptRule.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_DnsClientNrptRule' was found while processing the schema file
+'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DnsClientNrptRule\DSC_DnsClientNrptRule.s
+chema.mof'. This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DnsClientNrptRule\DS
+C_DnsClientNrptRule.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_DnsConnectionSuffix' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DnsConnectionSuffix\DSC_DnsConnectionSuffix.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DnsConnectionSuffix\DSC_DnsConnectionSuffix.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_DnsConnectionSuffix' was found while processing the schema file
+'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DnsConnectionSuffix\DSC_DnsConnectionSuff
+ix.schema.mof'. This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DnsConnectionSuffix\
+DSC_DnsConnectionSuffix.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_DnsServerAddress' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DnsServerAddress\DSC_DnsServerAddress.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DnsServerAddress\DSC_DnsServerAddress.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_DnsServerAddress' was found while processing the schema file
+'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DnsServerAddress\DSC_DnsServerAddress.sch
+ema.mof'. This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_DnsServerAddress\DSC
+_DnsServerAddress.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_Firewall' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_Firewall\DSC_Firewall.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_Firewall\DSC_Firewall.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_Firewall' was found while processing the schema file 'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_Firewall\DSC_Firewall.schema.mof'. This
+class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_Firewall\DSC_Firewal
+l.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_FirewallProfile' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_FirewallProfile\DSC_FirewallProfile.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_FirewallProfile\DSC_FirewallProfile.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_FirewallProfile' was found while processing the schema file
+'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_FirewallProfile\DSC_FirewallProfile.schem
+a.mof'. This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_FirewallProfile\DSC_
+FirewallProfile.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_HostsFile' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_HostsFile\DSC_HostsFile.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_HostsFile\DSC_HostsFile.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_HostsFile' was found while processing the schema file 'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_HostsFile\DSC_HostsFile.schema.mof'.
+This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_HostsFile\DSC_HostsF
+ile.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_IPAddress' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_IPAddress\DSC_IPAddress.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_IPAddress\DSC_IPAddress.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_IPAddress' was found while processing the schema file 'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_IPAddress\DSC_IPAddress.schema.mof'.
+This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_IPAddress\DSC_IPAddr
+ess.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_IPAddressOption' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_IPAddressOption\DSC_IPAddressOption.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_IPAddressOption\DSC_IPAddressOption.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_IPAddressOption' was found while processing the schema file
+'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_IPAddressOption\DSC_IPAddressOption.schem
+a.mof'. This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_IPAddressOption\DSC_
+IPAddressOption.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_NetAdapterAdvancedProperty' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterAdvancedProperty\DSC_NetAdapterAdvancedProperty.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterAdvancedProperty\DSC_NetAdapterAdvancedProperty.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_NetAdapterAdvancedProperty' was found while processing the schema file
+'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterAdvancedProperty\DSC_NetAdapter
+AdvancedProperty.schema.mof'. This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterAdvancedPr
+operty\DSC_NetAdapterAdvancedProperty.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_NetAdapterBinding' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterBinding\DSC_NetAdapterBinding.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterBinding\DSC_NetAdapterBinding.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_NetAdapterBinding' was found while processing the schema file
+'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterBinding\DSC_NetAdapterBinding.s
+chema.mof'. This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterBinding\DS
+C_NetAdapterBinding.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_NetAdapterLso' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterLso\DSC_NetAdapterLso.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterLso\DSC_NetAdapterLso.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_NetAdapterLso' was found while processing the schema file 'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterLso\DSC_NetAdapterLso.schema.mo
+f'. This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterLso\DSC_Ne
+tAdapterLso.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_NetAdapterName' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterName\DSC_NetAdapterName.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterName\DSC_NetAdapterName.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_NetAdapterName' was found while processing the schema file 'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterName\DSC_NetAdapterName.schema.
+mof'. This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterName\DSC_N
+etAdapterName.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_NetAdapterRdma' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterRdma\DSC_NetAdapterRdma.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterRdma\DSC_NetAdapterRdma.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_NetAdapterRdma' was found while processing the schema file 'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterRdma\DSC_NetAdapterRdma.schema.
+mof'. This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterRdma\DSC_N
+etAdapterRdma.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_NetAdapterRsc' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterRsc\DSC_NetAdapterRsc.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterRsc\DSC_NetAdapterRsc.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_NetAdapterRsc' was found while processing the schema file 'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterRsc\DSC_NetAdapterRsc.schema.mo
+f'. This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterRsc\DSC_Ne
+tAdapterRsc.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_NetAdapterRss' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterRss\DSC_NetAdapterRss.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterRss\DSC_NetAdapterRss.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_NetAdapterRss' was found while processing the schema file 'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterRss\DSC_NetAdapterRss.schema.mo
+f'. This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterRss\DSC_Ne
+tAdapterRss.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_NetAdapterState' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterState\DSC_NetAdapterState.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterState\DSC_NetAdapterState.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_NetAdapterState' was found while processing the schema file
+'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterState\DSC_NetAdapterState.schem
+a.mof'. This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetAdapterState\DSC_
+NetAdapterState.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_NetBios' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetBios\DSC_NetBios.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetBios\DSC_NetBios.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_NetBios' was found while processing the schema file 'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetBios\DSC_NetBios.schema.mof'. This
+class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetBios\DSC_NetBios.
+schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_NetConnectionProfile' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetConnectionProfile\DSC_NetConnectionProfile.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetConnectionProfile\DSC_NetConnectionProfile.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_NetConnectionProfile' was found while processing the schema file
+'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetConnectionProfile\DSC_NetConnectionPro
+file.schema.mof'. This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetConnectionProfile
+\DSC_NetConnectionProfile.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_NetIPInterface' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetIPInterface\DSC_NetIPInterface.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetIPInterface\DSC_NetIPInterface.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_NetIPInterface' was found while processing the schema file 'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetIPInterface\DSC_NetIPInterface.schema.
+mof'. This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetIPInterface\DSC_N
+etIPInterface.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_NetworkTeam' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetworkTeam\DSC_NetworkTeam.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetworkTeam\DSC_NetworkTeam.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_NetworkTeam' was found while processing the schema file 'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetworkTeam\DSC_NetworkTeam.schema.mof'.
+This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetworkTeam\DSC_Netw
+orkTeam.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_NetworkTeamInterface' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetworkTeamInterface\DSC_NetworkTeamInterface.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetworkTeamInterface\DSC_NetworkTeamInterface.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_NetworkTeamInterface' was found while processing the schema file
+'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetworkTeamInterface\DSC_NetworkTeamInter
+face.schema.mof'. This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_NetworkTeamInterface
+\DSC_NetworkTeamInterface.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_ProxySettings' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_ProxySettings\DSC_ProxySettings.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_ProxySettings\DSC_ProxySettings.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_ProxySettings' was found while processing the schema file 'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_ProxySettings\DSC_ProxySettings.schema.mo
+f'. This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_ProxySettings\DSC_Pr
+oxySettings.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_Route' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_Route\DSC_Route.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_Route\DSC_Route.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_Route' was found while processing the schema file 'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_Route\DSC_Route.schema.mof'. This class
+was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_Route\DSC_Route.sche
+ma.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_WaitForNetworkTeam' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_WaitForNetworkTeam\DSC_WaitForNetworkTeam.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_WaitForNetworkTeam\DSC_WaitForNetworkTeam.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_WaitForNetworkTeam' was found while processing the schema file
+'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_WaitForNetworkTeam\DSC_WaitForNetworkTeam
+.schema.mof'. This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_WaitForNetworkTeam\D
+SC_WaitForNetworkTeam.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_WinsServerAddress' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_WinsServerAddress\DSC_WinsServerAddress.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_WinsServerAddress\DSC_WinsServerAddress.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_WinsServerAddress' was found while processing the schema file
+'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_WinsServerAddress\DSC_WinsServerAddress.s
+chema.mof'. This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_WinsServerAddress\DS
+C_WinsServerAddress.schema.mof'. Remove the redundant definition, and then try again.
+
+Write-Error: A second CIM class definition for 'DSC_WinsSetting' was found while processing the schema file 'C:\Program Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_WinsSetting\DSC_WinsSetting.schema.mof'. This class was already defined in the file(s) 'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_WinsSetting\DSC_WinsSetting.schema.mof'. Remove the redundant definition, and then try again.
+Write-Error: A second CIM class definition for 'DSC_WinsSetting' was found while processing the schema file 'C:\Program
+Files\WindowsPowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_WinsSetting\DSC_WinsSetting.schema.mof'.
+This class was already defined in the file(s)
+'C:\Users\Administrator\Documents\PowerShell\Modules\NetworkingDsc\9.1.0\DscResources\DSC_WinsSetting\DSC_Wins
+Setting.schema.mof'. Remove the redundant definition, and then try again.
+
+
+    Directory: C:\Users\Administrator\DSC-IaC-Repo\DSC\Outputs\StudentBaseline
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---           2/18/2026  5:50 PM           6618 localhost.mof
+[+] Compilation complete.
+[*] Applying configuration (waits until complete)...
+[+] Apply complete.
+
+[Phase 3] Validation...
+[*] Pester validation will be added later.
+
+[+] BUILD SUCCESS
+[*] Next steps (commit outputs + evidence):
+    git add DSC\Outputs Evidence
+    git commit -m \ Build 20260218_175003\
+**********************
+PowerShell transcript end
+End time: 20260218175009
+**********************
