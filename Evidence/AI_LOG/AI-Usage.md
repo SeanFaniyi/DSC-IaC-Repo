@@ -1,7 +1,5 @@
-# AI Usage Log (AI_LOG)
-
-Record any AI/tool usage:
-- date/time
-- tool used
-- what it generated
-- what you changed afterwards
+ChatGPT was used for the following purposes:
+	- Syntax debugging assistance
+	 - README Report structure
+ 	- Naming conventions
+Microsoft’s ‘Ask Learn’ AI assistant used whilst navigating powershell documentation.
