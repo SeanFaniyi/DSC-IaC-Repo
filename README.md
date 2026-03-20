@@ -101,7 +101,7 @@ References
     • Francis, D. (2021). Mastering Active Directory. Packt Publishing Ltd.
     • Ihouele Caurcy (2025). Mastering Organizational Units (OUs) in Windows Server: Structure, Strategy & Best Practices. [online] Medium. Available at: https://medium.com/@ihouelecaurcy/mastering-organizational-units-ous-in-windows-server-structure-strategy-best-practices-94bd74f4a22c.
     • Microsoft (2023) Securing DSC credentials. Available at: https://docs.microsoft.com/en-us/powershell/dsc/configurations/configDataCredentials
-    • Montérémal, J. (2024). FGPP: definition and implementation of a refined password policy. [online] Appvizer. Available at: https://www.appvizer.co.uk/magazine/it/computer-security/fgpp [Accessed 20 Mar. 2026].
+    • Montérémal, J. (2024). FGPP: definition and implementation of a refined password policy. [online] Appvizer. Available at: https://www.appvizer.co.uk/magazine/it/computer-security/fgpp .
       
 
 AI Declaration

@@ -1,0 +1,11 @@
+178ba19 HEAD@{0}: pull --tags origin main: Fast-forward
+66a4120 HEAD@{1}: commit: ai declaration
+a3b29e6 HEAD@{2}: commit: Imported health checks
+acffda9 HEAD@{3}: commit: Minor debugging from merge
+4726e18 HEAD@{4}: commit (merge): Merging Child DC
+0c34730 HEAD@{5}: checkout: moving from Child-DC-Stable to main
+d7bf9f4 HEAD@{6}: commit: debugging
+79b1db8 HEAD@{7}: commit: All Nodes set to childdc locahost. Evidence compiled, health checks taken and saved under health check folder.
+175f080 HEAD@{8}: checkout: moving from Child-DC---Derby to Child-DC-Stable
+175f080 HEAD@{9}: checkout: moving from main to Child-DC---Derby
+0c34730 HEAD@{10}: clone: from https://github.com/SeanFaniyi/DSC-IaC-Repo.git

@@ -1,0 +1,45 @@
+7a8cdc1 HEAD@{0}: checkout: moving from DC-Promotion to Child-DC---Derby
+175f080 HEAD@{1}: checkout: moving from Child-DC---Derby to DC-Promotion
+7a8cdc1 HEAD@{2}: commit: Health Test ran on bolton
+316cbb2 HEAD@{3}: commit: Added users and permission groups to derby DC
+5ed816b HEAD@{4}: commit: Debugged - Stable
+e4fd063 HEAD@{5}: commit: Created OU structure for Derby DC
+175f080 HEAD@{6}: checkout: moving from DC-Promotion to Child-DC---Derby
+175f080 HEAD@{7}: commit: Debugging whilst testing derby dc
+5bbc581 HEAD@{8}: commit: Child DC added to All Nodes. Needs testing.
+66dc6c3 HEAD@{9}: commit: Added screen timeout GPO.
+4cdfddc HEAD@{10}: commit: Confirmed FGPP working for non-admins. Added John.Test and Amber.Test
+84c4d03 HEAD@{11}: commit: Enforced FGPP for all Admins in Bolton.
+8bd3952 HEAD@{12}: commit: Reduced requirements for global password policies.
+260680d HEAD@{13}: commit: Minor refractor. Evidence of OU's and groups being created
+c9a7c90 HEAD@{14}: commit: Standard Debugging - Next step is refactoring code to split allnodes into roles.
+4cb4e6b HEAD@{15}: commit: Developed idea on groups/user integration
+0fe270a HEAD@{16}: commit: Initial idea for adding groups. To revise using nested lists inside groups to contain their associated members.
+03f76cf HEAD@{17}: commit: forgot to append allnode changes to previous commit
+410622a HEAD@{18}: commit: Beginning work on OU structure inside root DC.
+7ccbd2a HEAD@{19}: commit: Standard debugging for DC-Promo
+de5f478 HEAD@{20}: commit: Imported Updated Run_BuildMain.ps1
+5c4f1c8 HEAD@{21}: checkout: moving from baseline to DC-Promotion
+5c4f1c8 HEAD@{22}: commit: Standard Debugging - Added DependsOn for issue during runtime
+215942c HEAD@{23}: reset: moving to HEAD
+215942c HEAD@{24}: checkout: moving from baseline to baseline
+215942c HEAD@{25}: checkout: moving from baseline to baseline
+215942c HEAD@{26}: checkout: moving from baseline to baseline
+215942c HEAD@{27}: checkout: moving from baseline to baseline
+215942c HEAD@{28}: reset: moving to origin/baseline
+215942c HEAD@{29}: checkout: moving from baseline to baseline
+215942c HEAD@{30}: pull --tags origin baseline: Fast-forward
+712eae6 HEAD@{31}: commit: Evidence of idempotency during baseline tests.
+216980b HEAD@{32}: commit: Changed Network & Default GW to match Virt-Managers x.x.122.x subnet. Connection to internet restored
+4e19a7e HEAD@{33}: commit: Evidence of initial attempt running orchestrator. Errors included around NetworkingDsc module.
+a6b7b68 HEAD@{34}: pull --tags origin baseline: Fast-forward
+7d6b9b3 HEAD@{35}: pull --tags origin baseline: Fast-forward
+30f6175 HEAD@{36}: pull --tags origin baseline: Fast-forward
+43941e8 HEAD@{37}: pull --tags origin baseline: Fast-forward
+e1560b0 HEAD@{38}: pull --tags origin baseline: Fast-forward
+75f1435 HEAD@{39}: pull --tags origin baseline: Fast-forward
+9c20749 HEAD@{40}: commit: Evidence added from running original StudentConfig.
+b2ac600 HEAD@{41}: checkout: moving from main to baseline
+0c34730 HEAD@{42}: reset: moving to HEAD
+0c34730 HEAD@{43}: commit: Build 20260213_100535
+7509af5 HEAD@{44}: clone: from https://github.com/SeanFaniyi/DSC-IaC-Repo.git
