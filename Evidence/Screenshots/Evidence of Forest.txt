@@ -1,0 +1,37 @@
+PS C:\Users\Administrator> get-AdDomain
+
+AllowedDNSSuffixes                 : {}
+ChildDomains                       : {}
+ComputersContainer                 : CN=Computers,DC=barmbuzz,DC=corp
+DeletedObjectsContainer            : CN=Deleted Objects,DC=barmbuzz,DC=corp
+DistinguishedName                  : DC=barmbuzz,DC=corp
+DNSRoot                            : barmbuzz.corp
+DomainControllersContainer         : OU=Domain Controllers,DC=barmbuzz,DC=corp
+DomainMode                         : Windows2016Domain
+DomainSID                          : S-1-5-21-3861790611-233151133-1362725812
+ForeignSecurityPrincipalsContainer : CN=ForeignSecurityPrincipals,DC=barmbuzz,DC=corp
+Forest                             : barmbuzz.corp
+InfrastructureMaster               : BB-DC01.barmbuzz.corp
+LastLogonReplicationInterval       :
+LinkedGroupPolicyObjects           : {CN={31B2F340-016D-11D2-945F-00C04FB984F9},CN=Policies,CN=System,DC=barm
+                                     buzz,DC=corp}
+LostAndFoundContainer              : CN=LostAndFound,DC=barmbuzz,DC=corp
+ManagedBy                          :
+Name                               : barmbuzz
+NetBIOSName                        : BARMBUZZ
+ObjectClass                        : domainDNS
+ObjectGUID                         : cd41565a-bb00-489d-b0e2-7e8979013651
+ParentDomain                       :
+PDCEmulator                        : BB-DC01.barmbuzz.corp
+PublicKeyRequiredPasswordRolling   : True
+QuotasContainer                    : CN=NTDS Quotas,DC=barmbuzz,DC=corp
+ReadOnlyReplicaDirectoryServers    : {}
+ReplicaDirectoryServers            : {BB-DC01.barmbuzz.corp}
+RIDMaster                          : BB-DC01.barmbuzz.corp
+SubordinateReferences              : {DC=ForestDnsZones,DC=barmbuzz,DC=corp,
+                                     DC=DomainDnsZones,DC=barmbuzz,DC=corp,
+                                     CN=Configuration,DC=barmbuzz,DC=corp}
+SystemsContainer                   : CN=System,DC=barmbuzz,DC=corp
+UsersContainer                     : CN=Users,DC=barmbuzz,DC=corp
+
+PS C:\Users\Administrator>
