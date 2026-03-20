@@ -534,6 +534,20 @@ Configuration StudentBaseline {
             # ADD ADMINS HERE^
         )
     }
+
+    ADGroup DER_DomainAdmins { 
+        # Adding G_DER_Admins to Domain Admins (Default added when promo dc)
+        GroupName        = 'Domain Admins'
+        GroupScope       = 'Global'
+        Category         = 'Security'
+        MembersToInclude = @('G_DER_Admins')
+        Credential       = $ChildDomainCredential
+        DependsOn        = @(
+            '[ADGroup]DER_ROLE_G_DER_Admins',
+            '[ADDomain]CreateChildDomain'
+        )
+    }
+
     # GPO Idle Time - Derby
     Script GPO_DER_IdleTimeout {
         GetScript = {
