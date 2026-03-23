@@ -1,0 +1,54 @@
+﻿* 178ba19 (origin/main, origin/HEAD) screenshots added
+* 66a4120 ai declaration
+* a3b29e6 Imported health checks
+* acffda9 Minor debugging from merge
+*   4726e18 Merging Child DC
+|\  
+| * d7bf9f4 (origin/Child-DC-Stable) debugging
+| * 79b1db8 All Nodes set to childdc locahost. Evidence compiled, health checks taken and saved under health check folder.
+| | * 7a8cdc1 (HEAD -> Child-DC---Derby) Health Test ran on bolton
+| | * 316cbb2 (origin/Child-DC---Derby) Added users and permission groups to derby DC
+| | * 5ed816b Debugged - Stable
+| | * e4fd063 Created OU structure for Derby DC
+| |/  
+| * 175f080 (DC-Promotion) Debugging whilst testing derby dc
+| * 5bbc581 (origin/DC-Promotion) Child DC added to All Nodes. Needs testing.
+| * 66dc6c3 Added screen timeout GPO.
+| * 4cdfddc Confirmed FGPP working for non-admins. Added John.Test and Amber.Test
+| * 84c4d03 Enforced FGPP for all Admins in Bolton.
+| * 8bd3952 Reduced requirements for global password policies.
+| * 260680d Minor refractor. Evidence of OU's and groups being created
+| * c9a7c90 Standard Debugging - Next step is refactoring code to split allnodes into roles.
+| * 4cb4e6b Developed idea on groups/user integration
+| * 0fe270a Initial idea for adding groups. To revise using nested lists inside groups to contain their associated members.
+| * 03f76cf forgot to append allnode changes to previous commit
+| * 410622a Beginning work on OU structure inside root DC.
+| * 7ccbd2a Standard debugging for DC-Promo
+| * de5f478 Imported Updated Run_BuildMain.ps1
+| * 5c4f1c8 (origin/baseline, baseline) Standard Debugging - Added DependsOn for issue during runtime
+| * 215942c Changed single NIC interface to Dual interfaces.
+| * 712eae6 Evidence of idempotency during baseline tests.
+| * 216980b Changed Network & Default GW to match Virt-Managers x.x.122.x subnet. Connection to internet restored
+| * 4e19a7e Evidence of initial attempt running orchestrator. Errors included around NetworkingDsc module.
+| * a6b7b68 Standard Debugging Commit
+| * 7d6b9b3 Standard Debugging Commit
+| * 30f6175 Standard Debugging Commit
+| * 43941e8 Standard Debugging Commit
+| * e1560b0 Standard Debugging Commit
+| * 75f1435 Further expanded Baseline resources and corresponding data.
+| * 7482478 Wk2S1 Baseline data introduced into AllNodes.psd1
+| * 9c20749 Evidence added from running original StudentConfig.
+| * b2ac600 Added core configuration to DSC resources and services
+| * 107492d Clear Student Config Template
+| | *   4429830 (refs/stash) On main: ignore
+| |/|\  
+|/| | | 
+| | | * 33eeead untracked files on main: 0c34730 Build 20260213_100535
+| | * 633067b index on main: 0c34730 Build 20260213_100535
+| |/  
+|/|   
+* | 0c34730 (main) Build 20260213_100535
+|/  
+* 7509af5 First commit test
+* e8cf18d Delete README.md
+* eec78c5 Create README.md

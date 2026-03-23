@@ -1,0 +1,52 @@
+**********************
+PowerShell transcript start
+Start time: 20260322234517
+Username: BARMBUZZ\Administrator
+RunAs User: BARMBUZZ\Administrator
+Configuration Name: 
+Machine: BB-BOL-DC01 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -WorkingDirectory ~
+Process ID: 7700
+PSVersion: 7.5.4
+PSEdition: Core
+GitCommitId: 7.5.4
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[+] Transcript started: Evidence\\Transcripts\\20260322_234517_Run_BuildMain.txt
+[+] Admin privileges confirmed.
+
+[Phase 1] Prerequisites...
+[*] Invoke-BarmBuzz-OneShots: LCM then Network
+[*] LCM already configured (flag present).
+[*] Network already configured (flag present).
+[*] LCM already configured (skipping).
+[*] Network already configured (skipping).
+[+] Phase 1 complete.
+[+] Credentials loaded (hardcoded lab mode *** see warning in comments above ***).
+
+[Phase 2] Compile + Apply DSC...
+[*] Compiling -> DSC\\Outputs\\StudentBaseline
+[*] Compiling via Windows PowerShell 5.1 (GroupPolicyDsc requires it)...
+
+[+] Compilation complete.
+[*] Applying configuration (waits until complete)...
+CimException: WinRM cannot process the request. The following error occurred while using Kerberos authentication: Cannot find the computer BB-DER-DC01. Verify that the computer exists on the network and that the name provided is spelled correctly.
+CimException: WinRM cannot process the request. The following error occurred while using Kerberos authentication: Cannot find the computer BB-DER-DC01. Verify that the computer exists on the network and that the name provided is spelled correctly.
+[+] Apply complete.
+
+[Phase 3] Validation...
+[*] Pester validation will be added later.
+
+[+] BUILD SUCCESS
+[*] Next steps (commit outputs + evidence):
+    git add DSC\Outputs Evidence
+    git commit -m \ Build 20260322_234517\
+**********************
+PowerShell transcript end
+End time: 20260322234633
+**********************
