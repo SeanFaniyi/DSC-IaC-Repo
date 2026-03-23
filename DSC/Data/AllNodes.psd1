@@ -27,7 +27,7 @@
                 NetworkCategory = 'Private'
             }
 
-            ExternalNetwork = @{
+            ExternalNetworkk = @{
                 InterfaceAlias = 'Ethernet' 
                 NetworkCategory = 'Private'
                 DisableDNSRegistrationOnNAT = $true
